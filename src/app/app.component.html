@@ -1,1 +1,23 @@
-<div>研修用課題：計算機</div>
+<html>
+<head>
+    <title>電卓</title>
+</head>
+<body>
+    <div>研修用課題：計算機 tsuji naoya </div>
+    <h1>電卓</h1>
+    <!-- ngModelを使用してnum1, num2にバインド -->
+    <input type="number" [(ngModel)]="num1" placeholder="First Number">
+    <select [(ngModel)]="operation">
+        <option value="add">＋</option>
+        <option value="subtract">ー</option>
+        <option value="multiply">×</option>
+        <option value="divide">÷</option>
+      </select>
+    <input type="number" [(ngModel)]="num2" placeholder="Second Number">
+    <button (click)="calculate()">計算</button>  
+    <button (click)="clearResult()">クリア</button>
+    <p>Result: {{ result }}</p>
+    <!-- Angularプロジェクトでは通常、スクリプトはangular.jsonで管理されるため、この行は不要 -->
+    <!-- <script src="src/app/calculator.js"></script> -->
+</body>
+</html>
