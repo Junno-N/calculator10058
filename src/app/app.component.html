@@ -16,6 +16,30 @@
     <input type="number" [(ngModel)]="num2" placeholder="Second Number">
     <button (click)="calculate()">計算</button>  
     <button (click)="clearResult()">クリア</button>
+
+    <p></p>
+    <!-- 計算が実行された後に「Result」という単語を表示 -->
+    <div *ngIf="isCalculated && !isDivisionByZero" style="display: inline;">Result </div>
+
+
+    <select [(ngModel)]="operation2" *ngIf="additionalCalculation && !isDivisionByZero">
+        <option value="add">＋</option>
+        <option value="subtract">ー</option>
+        <option value="multiply">×</option>
+        <option value="divide">÷</option>
+    </select>
+    <input type="number" [(ngModel)]="num3" *ngIf="additionalCalculation && !isDivisionByZero" placeholder="Third Number">
+
+    <!-- 追加計算ボタン、0で割る操作が行われていない場合のみ表示 -->
+    <button *ngIf="additionalCalculation && !isDivisionByZero" (click)="performAdditionalCalculation()" style="display: inline;">追加計算</button>
+    
+
+    <!-- 中間結果→計算元表示 -->
+    <p *ngIf="calculationBase !== null">
+        計算元: {{ calculationBase }}
+    </p>
+  
+
     <p>Result: {{ result }}</p>
     <!-- Angularプロジェクトでは通常、スクリプトはangular.jsonで管理されるため、この行は不要 -->
     <!-- <script src="src/app/calculator.js"></script> -->
