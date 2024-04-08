@@ -1,1 +1,38 @@
 <div>研修用課題：計算機</div>
+
+
+<input name="formula" type="text"[(ngModel)]="Display_formula" disabled>式<br/>
+<input name="answer" type="text"[(ngModel)]="Display_answer" disabled>計算結果<br/>
+
+<div class= "buttons">
+    <button (click) ="clear()">C</button>
+    <button (click) ="Formula('.');appendToExpression2('.')">.</button>
+    <button (click) ="Formula('÷');appendToExpression2('/')">÷</button>
+
+    <button (click) ="Formula('^');appendToExpression2('**')">^</button><br/>
+    <button (click) ="Formula('7');appendToExpression2('7')">7</button>
+    <button (click) ="Formula('8');appendToExpression2('8')">8</button>
+    <button (click) ="Formula('9');appendToExpression2('9')">9</button>
+
+    <button (click) ="Formula('-');appendToExpression2('-')">-</button><br/>
+    <button (click) ="Formula('4');appendToExpression2('4')">4</button>
+    <button (click) ="Formula('5');appendToExpression2('5')">5</button>
+    <button (click) ="Formula('6');appendToExpression2('6')">6</button>
+
+    <button (click) ="Formula('+');appendToExpression2('+')">+</button><br/>
+    <button (click) ="Formula('1');appendToExpression2('1')">1</button>
+    <button (click) ="Formula('2');appendToExpression2('2')">2</button>
+    <button (click) ="Formula('3');appendToExpression2('3')">3</button>
+
+    <button (click) ="Formula('×');appendToExpression2('*')">×</button><br/>
+    <button (click) ="Formula('0');appendToExpression2('0')">0</button>
+    <button (click) ="Formula('00');appendToExpression2('00')">00</button>
+    <button (click) ="calculate()">=</button><br/> </div>
+
+<div class= "explanation">
+
+<br/>
+仕様説明<br/>
+・小数点9以下は切り捨て<br/>
+・解が10000000000未満の計算が可能 <br/>
+</div>

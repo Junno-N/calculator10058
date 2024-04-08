@@ -1,0 +1,19 @@
+/* ディスプレイ */
+input {
+    width: 200px;
+    text-align: right; 
+    background: #ffffff;
+    border-top: solid #dcdcdca4 5px;
+    border-bottom: solid #dcdcdca4 5px;
+    border-right: solid #b6b6b6 6px;
+    border-left: solid hsl(0, 0%, 71%) 6px;
+}
+
+/* ボタン */
+button {
+    width: 50px;
+    height: 50px;
+    font-size: x-large;
+    background-color: white;
+    outline: none;
+  }
