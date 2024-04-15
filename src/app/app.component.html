@@ -1,38 +1,43 @@
 <div>研修用課題：計算機</div>
+<table>
+<div class= "calc-container">
+<div class= "formula-container">
+<div class="formula">
+</div><br/>
 
+<textarea name="formula" [(ngModel)]="Display_formula"disabled class="formula" placeholder="式を入力してください" ></textarea></div><br/>
+</div>
 
-<input name="formula" type="text"[(ngModel)]="Display_formula" disabled>式<br/>
-<input name="answer" type="text"[(ngModel)]="Display_answer" disabled>計算結果<br/>
+<div class= "answer-container">
+    <div class="answer">
+<textarea name="answer" type="text" [(ngModel)]="Display_answer" class="answer" disabled placeholder="答えが出力されます" ></textarea></div></div><br/>
+
 
 <div class= "buttons">
+    <button (click) ="allclear()">AC</button>
     <button (click) ="clear()">C</button>
-    <button (click) ="Formula('.');appendToExpression2('.')">.</button>
-    <button (click) ="Formula('÷');appendToExpression2('/')">÷</button>
+    <button (click) ="Formula3('\.');Formula_Background3('.');wordcount()">.</button>
+    <button (click) ="Formula2('÷');Formula_Background2('/');wordcount()">÷</button><br/>
 
-    <button (click) ="Formula('^');appendToExpression2('**')">^</button><br/>
-    <button (click) ="Formula('7');appendToExpression2('7')">7</button>
-    <button (click) ="Formula('8');appendToExpression2('8')">8</button>
-    <button (click) ="Formula('9');appendToExpression2('9')">9</button>
+    <button (click) ="Formula('7');Formula_Background('7');wordcount()">7</button>
+    <button (click) ="Formula('8');Formula_Background('8');wordcount()">8</button>
+    <button (click) ="Formula('9');Formula_Background('9');wordcount()">9</button>
 
-    <button (click) ="Formula('-');appendToExpression2('-')">-</button><br/>
-    <button (click) ="Formula('4');appendToExpression2('4')">4</button>
-    <button (click) ="Formula('5');appendToExpression2('5')">5</button>
-    <button (click) ="Formula('6');appendToExpression2('6')">6</button>
+    <button (click) ="Formula2('-');Formula_Background2('-');wordcount()">-</button><br/>
+    <button (click) ="Formula('4');Formula_Background('4');wordcount()">4</button>
+    <button (click) ="Formula('5');Formula_Background('5');wordcount()">5</button>
+    <button (click) ="Formula('6');Formula_Background('6');wordcount()">6</button>
 
-    <button (click) ="Formula('+');appendToExpression2('+')">+</button><br/>
-    <button (click) ="Formula('1');appendToExpression2('1')">1</button>
-    <button (click) ="Formula('2');appendToExpression2('2')">2</button>
-    <button (click) ="Formula('3');appendToExpression2('3')">3</button>
+    <button (click) ="Formula2('+');Formula_Background2('+');wordcount()">+</button><br/>
+    <button (click) ="Formula('1');Formula_Background('1');wordcount()">1</button>
+    <button (click) ="Formula('2');Formula_Background('2');wordcount()">2</button>
+    <button (click) ="Formula('3');Formula_Background('3');wordcount()">3</button>
 
-    <button (click) ="Formula('×');appendToExpression2('*')">×</button><br/>
-    <button (click) ="Formula('0');appendToExpression2('0')">0</button>
-    <button (click) ="Formula('00');appendToExpression2('00')">00</button>
-    <button (click) ="calculate()">=</button><br/> </div>
+    <button (click) ="Formula2('×');Formula_Background2('*');wordcount()">×</button><br/>
+    <button (click) ="Formula('0');Formula_Background('0');wordcount()">0</button>
+    <button (click) ="Formula00('00');Formula_Background00('00');wordcount()">00</button>
+    <button (click) ="Formula000('000');Formula_Background000('000');wordcount()">000</button>
+    <button (click) ="calculate();wordcount()">=</button><br/> </div>
 
-<div class= "explanation">
 
-<br/>
-仕様説明<br/>
-・小数点9以下は切り捨て<br/>
-・解が10000000000未満の計算が可能 <br/>
-</div>
+</table>

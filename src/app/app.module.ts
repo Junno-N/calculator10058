@@ -6,6 +6,7 @@ import { AppComponent } from './app.component';
 import { CommonModule } from "@angular/common";
 import { FormsModule } from '@angular/forms';
 
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -15,9 +16,10 @@ import { FormsModule } from '@angular/forms';
     AppRoutingModule,
     FormsModule,
     CommonModule,
-
   ],
   providers: [],
   bootstrap: [AppComponent]
 })
+
+
 export class AppModule { }
