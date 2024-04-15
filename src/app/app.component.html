@@ -8,6 +8,10 @@
 <textarea name="formula" [(ngModel)]="Display_formula"disabled class="formula" placeholder="式を入力してください" ></textarea></div><br/>
 </div>
 
+<textarea name="formula" [(ngModel)]="Background_formula"disabled class="formula" placeholder="式を入力してください" ></textarea><br/>
+
+
+
 <div class= "answer-container">
     <div class="answer">
 <textarea name="answer" type="text" [(ngModel)]="Display_answer" class="answer" disabled placeholder="答えが出力されます" ></textarea></div></div><br/>
@@ -16,7 +20,7 @@
 <div class= "buttons">
     <button (click) ="allclear()">AC</button>
     <button (click) ="clear()">C</button>
-    <button (click) ="Formula3('\.');Formula_Background3('.');wordcount()">.</button>
+    <button (click) ="Formula3('\.');Formula_Background3('\.');wordcount()">.</button>
     <button (click) ="Formula2('÷');Formula_Background2('/');wordcount()">÷</button><br/>
 
     <button (click) ="Formula('7');Formula_Background('7');wordcount()">7</button>

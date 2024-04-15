@@ -491,45 +491,81 @@ Formula_Background2(value:string){
     }
 }
   ;
-    Formula_Background3(value:string)
-    {
-      //空白の時小数点は記入しない
-      if(!this.Background_formula){return;}
-      if(this.Background_formula.length>=29){return;}    
-
-      if(!isNaN(Number(this.Background_formula.slice(-1)))){
-        let kakuninnyou1 = this.Background_formula.lastIndexOf('+') 
-        kakuninnyou1 = Math.max(kakuninnyou1, this.Background_formula.lastIndexOf('-'));
-        kakuninnyou1 = Math.max(kakuninnyou1, this.Background_formula.lastIndexOf('÷'));
-        kakuninnyou1 = kakuninnyou1 = Math.max(kakuninnyou1, this.Background_formula.lastIndexOf('×'));
-        let kakuninnyou2 =this.Background_formula.length - (kakuninnyou1 + 1);
-          
-        if (kakuninnyou2   >= this.saidaiketasuu)
-          {return;}}
-
-
-
-
-  if(this.Background_formula.endsWith('\*')||
+  ;Formula_Background3(value:string)
+  { 
+    //空白の時小数点は記入しない
+    if(!this.Background_formula){return;}
+    if(this.Background_formula.length>=29){return;}
+    
+    if(!isNaN(Number(this.Background_formula.slice(-1)))){
+      let kakuninnyou1 = this.Background_formula.lastIndexOf('\+')
+      kakuninnyou1 = Math.max(kakuninnyou1, this.Background_formula.lastIndexOf('\-'));
+      kakuninnyou1 = Math.max(kakuninnyou1, this.Background_formula.lastIndexOf('\/'));
+      kakuninnyou1 = kakuninnyou1 = Math.max(kakuninnyou1, this.Background_formula.lastIndexOf('\*'));
+      let kakuninnyou2 =this.Background_formula.length - (kakuninnyou1 + 1);
+        
+      if (kakuninnyou2  >= this.saidaiketasuu)
+        {return;}
+         
+    }   
+   
+    if(this.Background_formula.endsWith('\*')||
   this.Background_formula.endsWith('\/')||
   this.Background_formula.endsWith('\-')||
   this.Background_formula.endsWith('\+'))
-{return;}
-      else
+    {return;}
+
+    if(this.syousuu2 == 'checked!'){return;}
+
+
+    else{this.Background_formula += value;
+      this.syousuu2 = 'checked!' ;
+
+    }
+}
+  ;
 
 
 
-      if(this.syousuu2 == 'checked!'){return;}
+//     Formula_Background3(value:string)
+//     {
+//       //空白の時小数点は記入しない
+//       if(!this.Background_formula){return;}
+//       if(this.Background_formula.length>=29){return;}    
 
-      {this.Background_formula += value;
-        this.syousuu2 = 'checked!';
-      }
+//       if(!isNaN(Number(this.Background_formula.slice(-1)))){
+//         let kakuninnyou1 = this.Background_formula.lastIndexOf('+') 
+//         kakuninnyou1 = Math.max(kakuninnyou1, this.Background_formula.lastIndexOf('-'));
+//         kakuninnyou1 = Math.max(kakuninnyou1, this.Background_formula.lastIndexOf('÷'));
+//         kakuninnyou1 = kakuninnyou1 = Math.max(kakuninnyou1, this.Background_formula.lastIndexOf('×'));
+//         let kakuninnyou2 =this.Background_formula.length - (kakuninnyou1 + 1);
+          
+//         if (kakuninnyou2   >= this.saidaiketasuu)
+//           {return;}}
 
 
 
-  }
+
+//   if(this.Background_formula.endsWith('\*')||
+//   this.Background_formula.endsWith('\/')||
+//   this.Background_formula.endsWith('\-')||
+//   this.Background_formula.endsWith('\+'))
+// {return;}
+//       else
+
+
+
+//       if(this.syousuu2 == 'checked!'){return;}
+
+//       {this.Background_formula += value;
+//         this.syousuu2 = 'checked!';
+//       }
+
+
+
+//   }
   
-    ;
+//     ;
   
   
 
@@ -571,10 +607,13 @@ calculate()
   //入力された式への処理を実行する
   let result=eval(this.Background_formula) 
   Number(result);
-  if(result>10000000000){this.Display_answer="Error!桁数制限を超えています";return}
-
-
-  else{
+  if(result>10000000000){this.Display_answer="Error!値が大きすぎます";return;}
+  if(result<-10000000000){this.Display_answer="Error!値が小さすぎます";return;}
+    if(result<0.000000005 && result > 0){this.Display_answer="Error!四捨五入すると0になる式！";return;}
+    if(result>-0.000000005 && result　<　0){this.Display_answer="Error!四捨五入すると0になる式！";return;}
+ 
+ 
+    else{
     //result2へ小数点以下の桁調整を行った数値を代入
        this.result2=result.toLocaleString(undefined,{ maximumFractionDigits:8,useGrouping: false});
   //式計算の結果をディスプレーに出力
