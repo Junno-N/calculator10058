@@ -464,7 +464,13 @@ Formula_Background2(value:string){
     //空白の時小数点は記入しない
     if(!this.Display_formula){return;}
     if(this.Display_formula.length>=29){return;}
+
     
+
+
+  
+
+
     if(!isNaN(Number(this.Display_formula.slice(-1)))){
       let kakuninnyou1 = this.Display_formula.lastIndexOf('+')
       kakuninnyou1 = Math.max(kakuninnyou1, this.Display_formula.lastIndexOf('-'));
@@ -476,17 +482,32 @@ Formula_Background2(value:string){
         {return;}
          
     }   
-   
+  
+
+    
     if(this.Display_formula.endsWith('\×')||
   this.Display_formula.endsWith('\÷')||
   this.Display_formula.endsWith('\-')||
   this.Display_formula.endsWith('\+'))
     {return;}
 
+    let tester10=(/\.[0-9]*$/);
+    if(this.Display_formula.match(tester10)){;return;}
+
+
+    let tester9=(/[\+|\-|\×|\÷][0-9]*$/);
+    if(this.Display_formula.match(tester9)){this.Display_formula += value;
+    this.syousuu = 'checked!';return;}
+    
+
+
     if(this.syousuu == 'checked!'){return;}
 
 
-    else{this.Display_formula += value;
+
+
+
+else{this.Display_formula += value;
       this.syousuu = 'checked!' ;
 
     }
@@ -497,6 +518,7 @@ Formula_Background2(value:string){
     //空白の時小数点は記入しない
     if(!this.Background_formula){return;}
     if(this.Background_formula.length>=29){return;}
+    
     
     if(!isNaN(Number(this.Background_formula.slice(-1)))){
       let kakuninnyou1 = this.Background_formula.lastIndexOf('\+')
@@ -515,6 +537,14 @@ Formula_Background2(value:string){
   this.Background_formula.endsWith('\-')||
   this.Background_formula.endsWith('\+'))
     {return;}
+
+    let tester10=(/\.[0-9]*$/);
+    if(this.Background_formula.match(tester10)){;return;}
+
+
+    let tester9=(/[\+|\-|\/|\*][0-9]*$/);
+    if(this.Background_formula.match(tester9)){this.Background_formula += value;
+    this.syousuu2 = 'checked!';return;}
 
     if(this.syousuu2 == 'checked!'){return;}
 
