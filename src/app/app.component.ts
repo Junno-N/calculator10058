@@ -304,7 +304,6 @@ Formula_Background(value:string){
     
     
     this.Background_formula += value;}
-  
 
 ;
 
@@ -666,20 +665,28 @@ calculate()
 ;clear()
 {
 
-  
+
+  let tester7=(/[0-9]*\.[0-9]*[\+|\-|\*|\/][0-9]*\.$/)
+  let tester8=(/\[0-9]*\.[0-9]*[\+|\-|\*|\/]\-[0-9]*\.$/)
+
   //もし表示式の末尾が"."の場合
-  if(this.Display_formula.endsWith('.'))
+  if(this.Display_formula.endsWith('.')&&(this.Display_formula.match(tester7)||(this.Display_formula.match(tester8))))
 
     {  this.Display_formula = this.Display_formula.slice(0, -1);
     this.Background_formula = this.Background_formula.slice(0, -1);
-    this.syousuu='';
-    this.syousuu2='';
+
     return;}
- 
-else {this.Display_formula = this.Display_formula.slice(0, -1);
+
+
+if (this.Display_formula.endsWith('.')){this.Display_formula = this.Display_formula.slice(0, -1);
     this.Background_formula = this.Background_formula.slice(0, -1)
-  
-  };
+  this.syousuu="";
+  this.syousuu2="";
+  return;}
+  else{this.Display_formula = this.Display_formula.slice(0, -1);
+    this.Background_formula = this.Background_formula.slice(0, -1)}
+  ;
+
   
 }
 
