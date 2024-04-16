@@ -47,7 +47,7 @@ Formula(value:string){
   if(this.Display_formula.length >= 30){return;}
 
 
-  if(this.Display_formula.endsWith('\.0000000') && value == ('0') )
+  if(this.Display_formula.endsWith('\.00000000') && value == ('0') )
     {return;}
 
   if(this.Display_formula.length==1&&this.Display_formula.endsWith('0')){return;}
@@ -88,7 +88,7 @@ Formula00(value:string){
 
   if(!this.Display_formula){return;}
   
-  if(this.Display_formula.endsWith('\.000000'))
+  if(this.Display_formula.endsWith('\.0000000'))
     {return;}
 
   
@@ -149,7 +149,7 @@ Formula000(value:string){
   //let syousuusyori = ( this.Display_formula.match( /\./g ) || [] ).length
   if(this.Display_formula.length >= 28){return;}
 
-  if(this.Display_formula.endsWith('\.00000'))
+  if(this.Display_formula.endsWith('\.000000'))
     {return;}
 
 
@@ -219,7 +219,7 @@ Formula_Background(value:string){
   //let syousuusyori = ( this.Background_formula.match( /\./g ) || [] ).length
    if(this.Background_formula.length  >= 30){return;}
 
-   if(this.Background_formula.endsWith('\.0000000')&&value == ('0'))
+   if(this.Background_formula.endsWith('\.00000000')&&value == ('0'))
     {return;}
 
   if((this.Background_formula.endsWith('\*0'))||
@@ -252,7 +252,7 @@ Formula_Background(value:string){
   Formula_Background00(value:string){
     //let syousuusyori = ( this.Background_formula.match( /\./g ) || [] ).length
     if(this.Background_formula.length >= 29){return;}
-    if(this.Background_formula.endsWith('\.000000'))
+    if(this.Background_formula.endsWith('\.0000000'))
       {return;}
 
     if(!this.Background_formula){return;}
@@ -310,7 +310,7 @@ Formula_Background(value:string){
 
 Formula_Background000(value:string){
 
-if(this.Background_formula.endsWith('\.00000'))
+if(this.Background_formula.endsWith('\.000000'))
 {return;}
     
 
