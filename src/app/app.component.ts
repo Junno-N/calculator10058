@@ -40,7 +40,7 @@ zero2:string='';
 //数字桁数counter
 ketasuu:string='';
 
-saidaiketasuu: number =9;
+saidaiketasuu: number =10;
 //押下された数字/計算記号をディスプレイへと入力する関数
 Formula(value:string){
   //let syousuusyori = ( this.Display_formula.match( /\./g ) || [] ).length
@@ -368,6 +368,7 @@ if(this.Background_formula.endsWith('\.00000'))
 Formula2(value:string){ 
   //いきなりマイナス以外を押下すると何もしない
   if(!this.Display_formula&&value !='\-'){return;}
+  if(this.Display_formula.length == 1&&this.Display_formula.endsWith('\-')){return;}
   if(this.Display_formula.length>28){return;}
 //マイナスの計算を可能にする
   if(this.Display_formula.endsWith('\+')&&value =='\-'||
@@ -417,6 +418,7 @@ this.syousuu2=''
 Formula_Background2(value:string){ 
   if(this.Background_formula.endsWith('\.')){return;}
   if(!this.Background_formula&&value !='\-'){return;}
+  if(this.Background_formula.length == 1 &&this.Background_formula.endsWith('\+')){return;}
   if(this.Background_formula.length>28){return;}
 
   if(this.Background_formula.endsWith('\*')&&value =='\-'||
@@ -586,7 +588,7 @@ calculate()
   let tester1=(/\×\×|\÷\÷/)
     if(this.Display_formula.match(tester1)){this.Display_answer="Error!不正な式です!";return}
   //式が0で割られている場合
-  let tester2=(/\/0\.0*[\+|\-|\*|\/]|\/0$|\/0.0*$|\/0.0*$/)
+  let tester2=(/\/0\.0*[\+|\-|\*|\/]|\/0$|\/0.0*$|\/0.0*$|\/0[\+|\-|\*|\/]/)
   if(this.Background_formula.match(tester2)){this.Display_answer="Error!0で割ることはできません";return}
  //式が計算記号で終了する場合
    let tester3=(/[\+|\-|\*|\/|\.]$/)
@@ -600,27 +602,64 @@ calculate()
    //小数点が二つある場合
    //小数点の前後に数字が来ないパターン/式が小数点で開始もしくは終了するパターン/一つの数字に小数点が二つ以上含まれるパターン
   let tester6=(/[\+|\-|\*|\/]\.|\.[\+|\-|\*|\/]|\.$|[0-9]*\.[0-9]*\.[0-9]*|^\./)
-  if(this.Background_formula.match(tester6)){this.Display_answer="Error!不正な式です!";return}
+  if(this.Background_formula.match(tester6)){this.Display_answer="Error!";return}
   
 
   try{  
   //入力された式への処理を実行する
   let result=eval(this.Background_formula) 
   Number(result);
-  if(result>10000000000){this.Display_answer="Error!値が大きすぎます";return;}
-  if(result<-10000000000){this.Display_answer="Error!値が小さすぎます";return;}
-    if(result<0.000000005 && result > 0){this.Display_answer="Error!四捨五入すると0になる式！";return;}
-    if(result>-0.000000005 && result　<　0){this.Display_answer="Error!四捨五入すると0になる式！";return;}
+  if(result>=10000000000){this.Display_answer="Error!桁数制限";return;}
+  if(result<=-10000000000){this.Display_answer="Error!桁数制限";return;}
+    if(result<0.0000000005 && result > 0){this.Display_answer="Error!四捨五入すると0になります";return;}
+    if(result>-0.0000000005 && result < 0){this.Display_answer="Error!四捨五入すると0になります";return;}
  
  
     else{
     //result2へ小数点以下の桁調整を行った数値を代入
-       this.result2=result.toLocaleString(undefined,{ maximumFractionDigits:8,useGrouping: false});
+       this.result2=result.toLocaleString(undefined,{ maximumFractionDigits:9,useGrouping: false});
   //式計算の結果をディスプレーに出力
-       this.Display_answer=this.result2;}
-     }
+      if(this.result2.replace("\.","").replace("\-","").length >= 10)
+
+        {if(this.result2.match(/\./)&&this.result2.slice(0, 11).endsWith("\.")&&!this.result2.match(/\-/))
+          {this.Display_answer=this.result2.slice(0, 10);return}
+
+      if(this.result2.match(/\./)&&this.result2.slice(0, 12).endsWith("\.")&&this.result2.match(/\-/))
+          {this.Display_answer=this.result2.slice(0, 11);return;}
+
+        if(this.result2.match(/\./)&&this.result2.slice(0, 11).endsWith("\.")&&this.result2.match(/\-/))
+          {this.Display_answer=this.result2.slice(0, 12);return;}
+
+        if(this.result2.match(/\./)&&this.result2.slice(0, 10).endsWith("\.")&&!this.result2.match(/\-/))
+          {this.Display_answer=this.result2.slice(0, 11);return}  
+      
+        if(this.result2.match(/\./)&&this.result2.match(/\-/))
+          {this.Display_answer=this.result2.slice(0,12);return}  
+  
+
+        if(!this.result2.match(/\./)&&this.result2.match(/\-/))
+          {this.Display_answer=this.result2.slice(0, 11);return;}
+      
+      
+
+
+        if(this.result2.match(/\./))
+        {this.Display_answer=this.result2.slice(0,11);return}  
+
+        
+        
+        
+        else{this.Display_answer=this.result2.slice(0, 10);return;}
+          
+
+
+
+        }
+      else 
+      {this.Display_answer=this.result2;}
+     }}
   //計算が成り立たない場合はエラーメッセージを出力
-     catch(error){this.Display_answer='Error! 式が成り立っていません'}
+     catch(error){this.Display_answer='Error!'}
    };
     ;
 
