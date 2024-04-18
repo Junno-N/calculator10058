@@ -10,15 +10,6 @@ import { endWith } from 'rxjs';
 export class AppComponent 
 {
 title = '電卓';
-// counter:string='0';
-
-// count(){
-//   var num=Number(this.counter);
-//   num += 1;
-//   this.counter = String(num);
-// }
-// reset(){
-//   this.counter = '0';
 
 
 //表示する式の値を保持する変数
@@ -415,61 +406,60 @@ this.syousuu2=''
 
 //実際に計算を行う式を保持するための関数
 Formula_Background2(value:string){ 
-  if(this.Background_formula.endsWith('\.')){return;}
+  //いきなりマイナス以外を押下すると何もしない
   if(!this.Background_formula&&value !='\-'){return;}
-  if(this.Background_formula.length == 1 &&this.Background_formula.endsWith('\+')){return;}
+  if(this.Background_formula.length == 1&&this.Background_formula.endsWith('\-')){return;}
   if(this.Background_formula.length>28){return;}
-
-  if(this.Background_formula.endsWith('\*')&&value =='\-'||
+//マイナスの計算を可能にする
+  if(this.Background_formula.endsWith('\+')&&value =='\-'||
+  this.Background_formula.endsWith('\^')&&value =='\-'||
   this.Background_formula.endsWith('\/')&&value =='\-'||
-  this.Background_formula.endsWith('\+')&&value =='\-' )
-  {this.Background_formula += value;
-    this.syousuu='';
-    this.syousuu2=''
-    ;return
+  this.Background_formula.endsWith('\*')&&value =='\-'
+){this.Background_formula += value
+  this.syousuu='';
+  this.syousuu2=''
+  ;return
+}
 
-  }
 
-  if(this.Background_formula.endsWith('\*\-')||
-  this.Background_formula.endsWith('\/\-')||
-  this.Background_formula.endsWith('\-\-')||
-  this.Background_formula.endsWith('\+\-'))
-  {
-    this.Background_formula
-    =this.Background_formula.slice(0,-2);
-    this.Background_formula += value
-;   this.syousuu='';
-    this.syousuu2=''
-  }
-  
-  if(this.Background_formula.endsWith('\*')||
+if(this.Background_formula.endsWith('\+\-')||
+this.Background_formula.endsWith('\^\-')||
+this.Background_formula.endsWith('\/\-')||
+this.Background_formula.endsWith('\*\-')||
+this.Background_formula.endsWith('\-\-'))
+{this.Background_formula=this.Background_formula.slice(0,-2);this.Background_formula += value;
+  this.syousuu='';
+  this.syousuu2=''
+}
+
+//前が数字ではない
+if(this.Background_formula.endsWith('\.')){return;}  
+
+
+if(this.Background_formula.endsWith('\+')||
   this.Background_formula.endsWith('\/')||
-  this.Background_formula.endsWith('\+')||
+  this.Background_formula.endsWith('\*')||
   this.Background_formula.endsWith('\-'))
-  {
-    this.Background_formula
-    =this.Background_formula.slice(0,-1);
-    this.Background_formula += value;
-    this.syousuu='';
-    this.syousuu2=''
-  }
-    else
-    {this.Background_formula += value;}
-    this.syousuu='';
-    this.syousuu2=''
-  }
+{this.Background_formula=this.Background_formula.slice(0,-1);this.Background_formula += value;
+  this.syousuu='';
+  this.syousuu2=''
+}
+
+else
+{this.Background_formula += value
+this.syousuu='';
+this.syousuu2=''  
+;return}
+
+} 
+;
+
   
 ;Formula3(value:string)
   { 
     //空白の時小数点は記入しない
     if(!this.Display_formula){return;}
     if(this.Display_formula.length>=29){return;}
-
-    
-
-
-  
-
 
     if(!isNaN(Number(this.Display_formula.slice(-1)))){
       let kakuninnyou1 = this.Display_formula.lastIndexOf('+')
@@ -557,49 +547,6 @@ else{this.Display_formula += value;
   ;
 
 
-
-//     Formula_Background3(value:string)
-//     {
-//       //空白の時小数点は記入しない
-//       if(!this.Background_formula){return;}
-//       if(this.Background_formula.length>=29){return;}    
-
-//       if(!isNaN(Number(this.Background_formula.slice(-1)))){
-//         let kakuninnyou1 = this.Background_formula.lastIndexOf('+') 
-//         kakuninnyou1 = Math.max(kakuninnyou1, this.Background_formula.lastIndexOf('-'));
-//         kakuninnyou1 = Math.max(kakuninnyou1, this.Background_formula.lastIndexOf('÷'));
-//         kakuninnyou1 = kakuninnyou1 = Math.max(kakuninnyou1, this.Background_formula.lastIndexOf('×'));
-//         let kakuninnyou2 =this.Background_formula.length - (kakuninnyou1 + 1);
-          
-//         if (kakuninnyou2   >= this.saidaiketasuu)
-//           {return;}}
-
-
-
-
-//   if(this.Background_formula.endsWith('\*')||
-//   this.Background_formula.endsWith('\/')||
-//   this.Background_formula.endsWith('\-')||
-//   this.Background_formula.endsWith('\+'))
-// {return;}
-//       else
-
-
-
-//       if(this.syousuu2 == 'checked!'){return;}
-
-//       {this.Background_formula += value;
-//         this.syousuu2 = 'checked!';
-//       }
-
-
-
-//   }
-  
-//     ;
-  
-  
-
 //入力文字数制限超えている場合にはエラーを返す関数
 wordcount(){if(this.Display_formula.length>30){return;}}
 ;
@@ -610,14 +557,12 @@ calculate()
   //式が入力されていないときにボタンが押下された際は何もしない
   if(!this.Display_formula){return;}
 ;
-
-  
-  //計算前に式の不具合のチェックを行い、エラーを返して関数を終了する
   //掛け算と割り算が連続する場合
   let tester1=(/\×\×|\÷\÷/)
     if(this.Display_formula.match(tester1)){this.Display_answer="Error!不正な式です!";return}
   //式が0で割られている場合
-  let tester2=(/\/0\.0*[\+|\-|\*|\/]|\/0$|\/0.0*$|\/0.0*$|\/0[\+|\-|\*|\/]/)
+  let tester2=
+  (/\/0\.0*[\+|\-|\*|\/]|\/0$|\/0.0*$|\/0.0*$|\/0[\+|\-|\*|\/]|\/\-0[\+|\-|\*|\/]|\/\-0\.0*[\+|\-|\*|\/]|\/\-0[\+|\-|\*|\/]|\/\-0$|\/\-0\.0*$/)
   if(this.Background_formula.match(tester2)){this.Display_answer="Error!0で割ることはできません";return}
  //式が計算記号で終了する場合
    let tester3=(/[\+|\-|\*|\/|\.]$/)
