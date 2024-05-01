@@ -1,45 +1,77 @@
 <div>研修用課題：計算機</div>
-<table>
+ 
+
+<table class= "calcs">
 <div class= "calc-container">
 <div class= "formula-container">
-<div class="formula">
-</div><br/>
-<textarea name="formula" [(ngModel)]="Display_formula"disabled class="formula" placeholder="式を入力してください" ></textarea></div><br/>
-</div>
 
+<br/>
+<textarea name="formula" [(ngModel)]="Display_formula" disabled 
+class="formula" placeholder="式を入力してください" 
+></textarea><br/>
 
-
-
-<div class= "answer-container">
-    <div class="answer">
-<textarea name="answer" type="text" [(ngModel)]="Display_answer" class="answer" disabled placeholder="答えが出力されます" ></textarea></div></div><br/>
-
+<textarea name="formula" [(ngModel)]="Display_answer" disabled 
+class="formula" placeholder="解が出力されます" 
+></textarea><br/>
+</div></div>
 
 <div class= "buttons">
-    <button (click) ="allclear()">AC</button>
-    <button (click) ="clear()">C</button>
-    <button (click) ="Formula3('\.');Formula_Background3('\.');wordcount()">.</button>
-    <button (click) ="Formula2('÷');Formula_Background2('/');wordcount()">÷</button><br/>
 
-    <button (click) ="Formula('7');Formula_Background('7');wordcount()">7</button>
-    <button (click) ="Formula('8');Formula_Background('8');wordcount()">8</button>
-    <button (click) ="Formula('9');Formula_Background('9');wordcount()">9</button>
 
-    <button (click) ="Formula2('-');Formula_Background2('-');wordcount()">-</button><br/>
-    <button (click) ="Formula('4');Formula_Background('4');wordcount()">4</button>
-    <button (click) ="Formula('5');Formula_Background('5');wordcount()">5</button>
-    <button (click) ="Formula('6');Formula_Background('6');wordcount()">6</button>
 
-    <button (click) ="Formula2('+');Formula_Background2('+');wordcount()">+</button><br/>
-    <button (click) ="Formula('1');Formula_Background('1');wordcount()">1</button>
-    <button (click) ="Formula('2');Formula_Background('2');wordcount()">2</button>
-    <button (click) ="Formula('3');Formula_Background('3');wordcount()">3</button>
+    <button (click) ="resetter();allclear();keep()">AC</button>
+    <button (click) ="resetter();clear();keep()">C</button>
+    <button (click) ="Formula3('\.');Formula_Background3('\.');wordcount();keep();">.</button>
+    <button (click) ="Formula2('÷');Formula_Background2('/');wordcount();keep()">÷</button><br/>
 
-    <button (click) ="Formula2('×');Formula_Background2('*');wordcount()">×</button><br/>
-    <button (click) ="Formula('0');Formula_Background('0');wordcount()">0</button>
-    <button (click) ="Formula00('00');Formula_Background00('00');wordcount()">00</button>
-    <button (click) ="Formula000('000');Formula_Background000('000');wordcount()">000</button>
-    <button (click) ="calculate();wordcount()">=</button><br/> </div>
+    <button (click) ="resetter();Formula('7');Formula_Background('7');wordcount();keep();">7</button>
+    <button (click) ="resetter();Formula('8');Formula_Background('8');wordcount();keep()">8</button>
+    <button (click) ="resetter();Formula('9');Formula_Background('9');wordcount();keep()">9</button>
 
+    <button (click) ="resetter();Formula2('-');Formula_Background2('-');wordcount();keep()">-</button><br/>
+    <button (click) ="resetter();Formula('4');Formula_Background('4');wordcount();keep()">4</button>
+    <button (click) ="resetter();Formula('5');Formula_Background('5');wordcount();keep()">5</button>
+    <button (click) ="resetter();Formula('6');Formula_Background('6');wordcount();keep()">6</button>
+
+    <button (click) ="Formula2('+');Formula_Background2('+');wordcount();keep()">+</button><br/>
+    <button (click) ="resetter();Formula('1');Formula_Background('1');wordcount();keep()">1</button>
+    <button (click) ="resetter();Formula('2');Formula_Background('2');wordcount();keep()">2</button>
+    <button (click) ="resetter();Formula('3');Formula_Background('3');wordcount();keep()">3</button>
+
+    <button (click) ="Formula2('×');Formula_Background2('*');wordcount();keep()">×</button><br/>
+    <button (click) ="resetter();Formula('0');Formula_Background('0');wordcount();keep()">0</button>
+    <button (click) ="Formula00('00');Formula_Background00('00');wordcount();keep()">00</button>
+    <button (click) ="Formula000('000');Formula_Background000('000');wordcount();keep()">000</button>
+    <button (click) ="calculate();wordcount();keep();logging1();logging2();">=</button><br/> 
+  
+</div>
 
 </table>
+
+<table class="logger">
+    <div class= "logger-container">
+    <div class= "favkeeper-container">
+         
+    </div><br/>
+    <div class= "button2">  
+    <textarea name="logger" [(ngModel)]="keepview" disabled 
+    class="logger" placeholder="任意の式を保存可能" 
+    ></textarea><br/>
+    <button (click) ="output();keep()">追加</button>
+    <button (click) ="reset();keep()">初期化</button>
+    <button (click) ="switcher();keep()">切り替え</button>
+    <button (click) ="favkeep();keep()">保存</button>
+    <br/>
+
+    <textarea name="logger"  [(ngModel)]="testtesttest4" class="logger" disabled 
+    placeholder="ログが保存されます" 
+    id="contentToConvert2"
+    ></textarea><br/>
+    <button (click) ="logging3();keep()">初期化
+    </button>
+    <button (click) ="convetToPDF();keep()">PDF化</button>
+
+    <br/>   
+
+    </div>
+
