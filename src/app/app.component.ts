@@ -48,8 +48,7 @@ logging1()
   //既定の行数以上の履歴がある場合、アラートを出し、記録を行わない
   if(this.testtesttest !== null &&((this.testtesttest.match(/\n/g) || []).length + 1) > 50)
   {alert('記録可能上限です！');return;}
-  
- 
+   
   else
     {
     this.testtest = (this.Display_formula + "=" + this.Display_answer + "\n");
@@ -101,8 +100,6 @@ keep()
 
   ;localStorage.setItem('DAkeeper3',
   this.Display_answer?.replaceAll("null",""))
-  // ;localStorage.setItem('DAkeeper4',
-  // this.Display_answer?.replaceAll("null",""))
   ;localStorage.setItem('SYkeeper5',this.syousuu?.replaceAll("null",""))
   ;localStorage.setItem('SY2keeper6',this.syousuu2?.replaceAll("null",""))
   ;localStorage.setItem('SYkeeper7',this.syousuu?.replaceAll("null",""))
