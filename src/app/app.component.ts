@@ -37,11 +37,11 @@ logging1()
   //kiroku変数はcalc関数実行時に式が正しくないと判断された場合フラグが立つ
   if(this.kiroku=="error"){return;}
   //下記の5行を追加 同じ式をに連続で記録しようとした際にアラート
-  let cutter = (this.Display_formula + "=" + this.Display_answer + "\n");
-  if(this.testtest == cutter)
-    {alert('直前の入力と同じ式です');return;}
-  if(!(!this.testtesttest4)&&cutter == (this.testtesttest4.slice(-(cutter.length))))
-  {alert('直前の入力と同じ式です');return;}
+  // let cutter = (this.Display_formula + "=" + this.Display_answer + "\n");
+  // if(this.testtest == cutter)
+  //   {alert('直前の入力と同じ式です');return;}
+  // if(!(!this.testtesttest4)&&cutter == (this.testtesttest4.slice(-(cutter.length))))
+  // {alert('直前の入力と同じ式です');return;}
      
   if(this.Display_answer.match(/Error/))
   {return;} 
