@@ -1,0 +1,140 @@
+
+
+.container{
+    display:flex;
+    flex-direction:column;
+    // align-items:center;
+    width:300px;
+    color:white;    
+}
+
+
+
+.favkeeper-container{ 
+    width :300pX;
+    margin:0 auto;
+    overflow-x: auto;
+    white-space:nowrap;
+    color:white;   
+}
+
+
+.logger-container { 
+    width :400pX;
+    margin:0 auto;
+    overflow-x: auto;
+    white-space:nowrap;
+    color:white;
+    
+}
+
+table.calcs {
+
+    float:left;
+    width: 350px;
+    height: 380px;
+    border: solid 4px gray;
+    border-right: solid 4px gray;
+    border-bottom: solid 4px gray;
+    border-radius: 10px;
+    text-align: center;
+    padding: 8px;
+    margin: 20px;
+    background-color:rgba(225, 225, 225, 0.758);
+  }
+
+
+  table.logger{
+    float:left;
+    width: 200px;
+    height: 380px;
+        border: solid 4px transparent;
+        border-right: solid 4px transparent;
+        border-bottom: solid 4px transparent;
+    border-radius: 10px;
+    text-align: center;
+    padding: 8px;
+    margin: 20px;
+  }
+
+.calc-container { 
+    width :400pX;
+    margin:0 auto;
+    overflow-x: auto;
+    white-space:nowrap;
+    color:white;
+}
+
+
+.buttons{ button
+{width :50px;
+ height :50px;
+margin: 7px;
+font-size: 18px;
+border: none;
+border-radius:5px;
+background-color :gray;
+flex:1;
+cursor : pointer;
+
+&:hover {
+    background-color: darkgray;
+}
+}
+
+}
+
+
+
+
+
+textarea.formula {
+    width : calc(80% - 12px);
+    height: 50px;  
+        padding: 7px;
+        font-size: 14px;
+        //    margin: 0; font-family: "Noto Sans JP", sans-serif;  
+
+        border : 5px solid #ccc;
+        border-radius: 5px;
+        margin : 5px ;        
+        resize: none;
+        text-align: right;
+        background:#ffffff;
+    
+}
+
+textarea.logger {
+    width : 300px;
+    height: 50px;  
+        padding: 7px;
+        font-size: 11px;
+        border : 5px solid #ccc;
+        border-radius: 5px;
+        margin : 5px ;        
+        resize: none;
+        text-align: right;
+        background:#ffffff;
+    
+}
+
+
+.button2{ button
+    {width :57px;
+     height :18px;
+    margin: 2px;
+    font-size: 12px;
+    border: none;
+    border-radius:5px;
+    background-color :gray;
+    flex:1;
+    cursor : pointer;
+    
+    &:hover {
+        background-color: darkgray;
+    }
+    }
+    
+    }
+
+
