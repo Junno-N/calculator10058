@@ -1,0 +1,14 @@
+{
+  "targets": {
+    "authtest-ff85d": {
+      "hosting": {
+        "frontend": [
+          "authtest-ff85d"
+        ]
+      }
+    }
+  },
+  "projects": {
+    "default": "authtest-ff85d"
+  }
+}
