@@ -280,8 +280,19 @@ add(){this.currentTutorial.Display_formula += "3"};
     this.currentTutorial.Display_formula.endsWith('\-')){
       if(this.currentTutorial.keepview.startsWith('\-')){}
       else{return;}}
+  
+if(this.currentTutorial.Display_formula.endsWith('\-')
+  &&this.currentTutorial.keepview.startsWith('\-'))
+{return;}
+
     if(this.currentTutorial.Display_formula.endsWith('\.')){return;}
 
+    if(this.currentTutorial.Display_formula.endsWith('\+\-')||
+      this.currentTutorial.Display_formula.endsWith('\^\-')||
+      this.currentTutorial.Display_formula.endsWith('\÷\-')||
+      this.currentTutorial.Display_formula.endsWith('\×\-')||
+      this.currentTutorial.Display_formula.endsWith('\-\-'))
+{return;}
 
     
     if(this.currentTutorial.Display_formula.replaceAll("\ ","").length + this.currentTutorial.keepview.replaceAll("\ ","").length > 30){return;}
