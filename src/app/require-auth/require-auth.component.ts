@@ -237,7 +237,7 @@ add(){this.currentTutorial.Display_formula += "3"};
         return;          
       }  
       if(!this.currentTutorial.switchs)
-{return;}
+{alert("計算機をリセット後にモード切替をしてください");return;}
   };
   
   ;favkeep()
@@ -272,14 +272,17 @@ add(){this.currentTutorial.Display_formula += "3"};
     if(!this.currentTutorial.Background_formula){return;}  
     if(!this.currentTutorial.Display_formula){return;}
     if(this.currentTutorial.switchs=="switching!"){return;}
-    if(this.currentTutorial.Display_formula.endsWith('\+')||
+    if(!this.currentTutorial.keepview){return;}
+        if(this.currentTutorial.Display_formula.endsWith('\+')||
     this.currentTutorial.Display_formula.endsWith('\^')||
     this.currentTutorial.Display_formula.endsWith('\÷')||
     this.currentTutorial.Display_formula.endsWith('\×')||
-    this.currentTutorial.Display_formula.endsWith('\-')){return;}
+    this.currentTutorial.Display_formula.endsWith('\-')){
+      if(this.currentTutorial.keepview.startsWith('\-')){}
+      else{return;}}
     if(this.currentTutorial.Display_formula.endsWith('\.')){return;}
 
-    if(!this.currentTutorial.keepview){return;}
+
     
     if(this.currentTutorial.Display_formula.replaceAll("\ ","").length + this.currentTutorial.keepview.replaceAll("\ ","").length > 30){return;}
     else

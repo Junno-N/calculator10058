@@ -1,6 +1,11 @@
 @if (angularFireAuth.authState | async) {
     <button (click)="logOut()">Log out</button>
 
+<app-require-auth></app-require-auth>
+
+
 } @else {
+
     <button googleSso>Sign in with google</button>
-    }
+    <br>計算機はログイン後使用可能となります
+}
