@@ -578,7 +578,9 @@ if(!this.currentTutorial.Display_formula){!this.currentTutorial.Display_formula 
     {this.currentTutorial.Display_formula += value
       this.currentTutorial.syousuu='';
       this.currentTutorial.syousuu2='';return}
-  
+
+
+
     if(this.currentTutorial.Display_formula.endsWith('\+\-')||
       this.currentTutorial.Display_formula.endsWith('\^\-')||
       this.currentTutorial.Display_formula.endsWith('\÷\-')||
@@ -626,10 +628,13 @@ if(!this.currentTutorial.Display_formula){!this.currentTutorial.Display_formula 
       ;this.currentTutorial.syousuu2=''
       ;return
     }
+
+
+
     if(!this.currentTutorial.Background_formula){return;}
 
     if(this.currentTutorial.Background_formula.replaceAll("\ ","").length == 1&&
-      this.currentTutorial.Background_formula.endsWith('\-')){return;}
+      this.currentTutorial.Background_formula.endsWith('\-')&&!this.currentTutorial.switchs){return;}
     if(this.currentTutorial.Background_formula.replaceAll("\ ","").length>28){return;}
   //マイナスの計算を可能にする
     if(this.currentTutorial.Background_formula.endsWith('\+')&&value =='\-'||
