@@ -248,7 +248,10 @@ add(){this.currentTutorial.Display_formula += "3"};
     {alert("値が入力されていません！！！  ");return;}    
     if(this.currentTutorial.Background_formula.endsWith("\.")&&this.currentTutorial.switchs=="switching!")
       {alert("小数点での終了！！！");return;}
-  
+    
+    if(this.currentTutorial.Background_formula.replaceAll("\ ","").length > 29&&this.currentTutorial.switchs=="switching!")
+      {alert("文字数が多すぎます");return;}
+
     if(this.currentTutorial.switchs=="switching!"
     &&!this.currentTutorial.Background_formula)
   {this.currentTutorial.Background_formula="\ ";}
@@ -269,14 +272,16 @@ add(){this.currentTutorial.Display_formula += "3"};
     if(!this.currentTutorial.Background_formula){return;}  
     if(!this.currentTutorial.Display_formula){return;}
     if(this.currentTutorial.switchs=="switching!"){return;}
-    if(this.currentTutorial.Display_formula.endsWith('\+\-')||
+    if(this.currentTutorial.Display_formula.endsWith('\+')||
     this.currentTutorial.Display_formula.endsWith('\^')||
     this.currentTutorial.Display_formula.endsWith('\÷')||
     this.currentTutorial.Display_formula.endsWith('\×')||
     this.currentTutorial.Display_formula.endsWith('\-')){return;}
     if(this.currentTutorial.Display_formula.endsWith('\.')){return;}
+
     if(!this.currentTutorial.keepview){return;}
-    if(this.currentTutorial.Display_formula.length + this.currentTutorial.keepview.length >= 30){return;}
+    
+    if(this.currentTutorial.Display_formula.replaceAll("\ ","").length + this.currentTutorial.keepview.replaceAll("\ ","").length > 30){return;}
     else
     {
       this.currentTutorial.Background_formula += this.currentTutorial.keepview_background?.slice(1);
@@ -340,13 +345,14 @@ add(){this.currentTutorial.Display_formula += "3"};
     if(!this.currentTutorial.Display_formula)
       {this.currentTutorial.Display_formula += value; return}
 
-    if(this.currentTutorial.Display_formula.length >= 30){return;}
+    if(this.currentTutorial.Display_formula.replaceAll("\ ","").length >= 30){return;}
   
     if(this.currentTutorial.Display_formula.endsWith('\.00000000') && value == ('0') )
       {return;}
   
-    if(this.Display_formula.length==1&&this.Display_formula.endsWith('0')){return;}
-  
+    if(this.currentTutorial.Display_formula.length==1&&this.currentTutorial.Display_formula.endsWith('0'))
+      {return;}
+    
     if((this.currentTutorial.Display_formula.endsWith('\×0'))||
     (this.currentTutorial.Display_formula.endsWith('\÷0'))||
     (this.currentTutorial.Display_formula.endsWith('\+0'))||
@@ -374,9 +380,9 @@ if(!this.currentTutorial.Display_formula){!this.currentTutorial.Display_formula 
 
     if(this.currentTutorial.Display_formula.endsWith('\.0000000')){return;}  
 
-    if(this.currentTutorial.Display_formula.length >= 29){return;}
+    if(this.currentTutorial.Display_formula.replaceAll("\ ","").length >= 29){return;}
   
-    if(this.currentTutorial.Display_formula.length==1&&this.Display_formula.endsWith('0')){return;}
+    if(this.currentTutorial.Display_formula.replaceAll("\ ","").length==1&&this.currentTutorial.Display_formula.endsWith('0')){return;}
     
     if(this.currentTutorial.Display_formula.endsWith('\×')||
     this.currentTutorial.Display_formula.endsWith('\÷')||
@@ -408,9 +414,9 @@ if(!this.currentTutorial.Display_formula){!this.currentTutorial.Display_formula 
   {  
     if(!this.currentTutorial.Display_formula){return;}
 
-    if(this.currentTutorial.Display_formula.length >= 28){return;}
+    if(this.currentTutorial.Display_formula.replaceAll("\ ","").length >= 28){return;}
     if(this.currentTutorial.Display_formula.endsWith('\.000000')){return;}
-    if(this.currentTutorial.Display_formula.length==1&&this.Display_formula.endsWith('0')){return;}
+    if(this.currentTutorial.Display_formula.replaceAll("\ ","").length==1&&this.currentTutorial.Display_formula.endsWith('0')){return;}
     if(this.currentTutorial.Display_formula.endsWith('\×')||
     this.currentTutorial.Display_formula.endsWith('\÷')||
     this.currentTutorial.Display_formula.endsWith('\+')||
@@ -434,10 +440,7 @@ if(!this.currentTutorial.Display_formula){!this.currentTutorial.Display_formula 
       if(kakuninnyou2.toString().includes('\.'))
       {kakuninnyou2 = kakuninnyou2 -1}
   
-      if (kakuninnyou2 >= this.saidaiketasuu -2){return;}
-  
-  
-  
+      if (kakuninnyou2 >= this.saidaiketasuu -2){return;}  
     }
     this.currentTutorial.Display_formula += value;
   }
@@ -449,8 +452,8 @@ if(!this.currentTutorial.Display_formula){!this.currentTutorial.Display_formula 
     if(this.currentTutorial.switchs == "switching!" && this.currentTutorial.Display_formula =="\ "){return;}
     if(!this.currentTutorial.Background_formula)
       {this.currentTutorial.Background_formula += value ;return}
-    if(this.currentTutorial.Background_formula.length==1&&this.Background_formula.endsWith('0')){return;}
-    if(this.currentTutorial.Background_formula.length  >= 30){return;}
+    if(this.currentTutorial.Background_formula.replaceAll("\ ","").length==1&&this.currentTutorial.Background_formula.endsWith('0')){return;}
+    if(this.currentTutorial.Background_formula.replaceAll("\ ","").length  >= 30){return;}
     if(this.currentTutorial.Background_formula.endsWith('\.00000000')&&value == ('0'))
     {return;}
   
@@ -478,11 +481,11 @@ if(!this.currentTutorial.Display_formula){!this.currentTutorial.Display_formula 
   {
     if(!this.currentTutorial.Background_formula){return;}
    
-    if(this.currentTutorial.Background_formula.length >= 29){return;}
+    if(this.currentTutorial.Background_formula.replaceAll("\ ","").length >= 29){return;}
     if(this.currentTutorial.Background_formula.endsWith('\.0000000')){return;}
   
 
-    if(this.currentTutorial.Background_formula.length==1
+    if(this.currentTutorial.Background_formula.replaceAll("\ ","").length==1
       &&this.currentTutorial.Background_formula.endsWith('0')){return;}  
     if(this.currentTutorial.Background_formula.endsWith('\*')||
       this.currentTutorial.Background_formula.endsWith('\/')||
@@ -516,8 +519,8 @@ if(!this.currentTutorial.Display_formula){!this.currentTutorial.Display_formula 
   {
     if(!this.currentTutorial.Background_formula){return;}
     if(this.currentTutorial.Background_formula.endsWith('\.000000')){return;}
-    if(this.currentTutorial.Background_formula.length >= 28){return;}
-    if(this.currentTutorial.Background_formula.length==1&&this.currentTutorial.Background_formula.endsWith('0')){return;}
+    if(this.currentTutorial.Background_formula.replaceAll("\ ","").length >= 28){return;}
+    if(this.currentTutorial.Background_formula.replaceAll("\ ","").length==1&&this.currentTutorial.Background_formula.endsWith('0')){return;}
     if(this.currentTutorial.Background_formula.endsWith('\*')||
       this.currentTutorial.Background_formula.endsWith('\/')||
       this.currentTutorial.Background_formula.endsWith('\+')||
@@ -553,14 +556,17 @@ if(!this.currentTutorial.Display_formula){!this.currentTutorial.Display_formula 
     {this.currentTutorial.Display_formula += value;return;}
     //いきなりマイナス以外を押下すると何もしない
 
+
+
     if(!this.currentTutorial.Display_formula&&value == '\-')
       {this.currentTutorial.Display_formula += value
       this.currentTutorial.syousuu='';
       this.currentTutorial.syousuu2='';return}
-      if(!this.currentTutorial.Display_formula){return;} 
+      if(!this.currentTutorial.Display_formula){;return;} 
 
-    if(this.currentTutorial.Display_formula.length == 1&&this.currentTutorial.Display_formula.endsWith('\-')){return;}
-    if(this.currentTutorial.Display_formula.length>28){return;}
+    if(this.currentTutorial.Display_formula.replaceAll("\ ","").length == 1&&
+        this.currentTutorial.Display_formula.endsWith('\-')&&!this.currentTutorial.switchs){;return;}
+    if(this.currentTutorial.Display_formula.replaceAll("\ ","").length>28){;console.log("5");return;}
     //マイナスの計算を可能にする
     if(this.currentTutorial.Display_formula.endsWith('\+')&&value =='\-'||
       this.currentTutorial.Display_formula.endsWith('\^')&&value =='\-'||
@@ -612,7 +618,6 @@ if(!this.currentTutorial.Display_formula){!this.currentTutorial.Display_formula 
   
     //いきなりマイナス以外を押下すると何もしない
     if(!this.currentTutorial.Background_formula&&value == '\-')
-
     {this.currentTutorial.Background_formula += value
       ;this.currentTutorial.syousuu=''
       ;this.currentTutorial.syousuu2=''
@@ -620,9 +625,9 @@ if(!this.currentTutorial.Display_formula){!this.currentTutorial.Display_formula 
     }
     if(!this.currentTutorial.Background_formula){return;}
 
-    if(this.currentTutorial.Background_formula.length == 1&&
+    if(this.currentTutorial.Background_formula.replaceAll("\ ","").length == 1&&
       this.currentTutorial.Background_formula.endsWith('\-')){return;}
-    if(this.currentTutorial.Background_formula.length>28){return;}
+    if(this.currentTutorial.Background_formula.replaceAll("\ ","").length>28){return;}
   //マイナスの計算を可能にする
     if(this.currentTutorial.Background_formula.endsWith('\+')&&value =='\-'||
       this.currentTutorial.Background_formula.endsWith('\^')&&value =='\-'||
@@ -672,7 +677,7 @@ if(!this.currentTutorial.Display_formula){!this.currentTutorial.Display_formula 
   { 
     //空白の時小数点は記入しない
     if(!this.currentTutorial.Display_formula){return;}
-    if(this.currentTutorial.Display_formula.length>=29){return;}
+    if(this.currentTutorial.Display_formula.replaceAll("\ ","").length>=29){return;}
   
     if(!isNaN(Number(this.currentTutorial.Display_formula.slice(-1))))
       {
@@ -680,7 +685,7 @@ if(!this.currentTutorial.Display_formula){!this.currentTutorial.Display_formula 
         kakuninnyou1 = Math.max(kakuninnyou1, this.currentTutorial.Display_formula.lastIndexOf('-'));
         kakuninnyou1 = Math.max(kakuninnyou1, this.currentTutorial.Display_formula.lastIndexOf('÷'));
         kakuninnyou1 = kakuninnyou1 = Math.max(kakuninnyou1, this.currentTutorial.Display_formula.lastIndexOf('×'));
-        let kakuninnyou2 =this.currentTutorial.Display_formula.length - (kakuninnyou1 + 1);
+        let kakuninnyou2 =this.currentTutorial.Display_formula.replaceAll("\ ","").length - (kakuninnyou1 + 1);
           
         if (kakuninnyou2   >= this.saidaiketasuu){return;}       
       }   
@@ -711,7 +716,7 @@ if(!this.currentTutorial.Display_formula){!this.currentTutorial.Display_formula 
 
       if(this.currentTutorial.Background_formula=="\n"){return;}      
       if(!this.currentTutorial.Background_formula){return;}
-      if(this.currentTutorial.Background_formula.length>=29){return;}
+      if(this.currentTutorial.Background_formula.replaceAll("\ ","").length>=29){return;}
       
       if(!isNaN(Number(this.currentTutorial.Background_formula.slice(-1)))){
         let kakuninnyou1 = this.currentTutorial.Background_formula.lastIndexOf('\+')
@@ -721,7 +726,7 @@ if(!this.currentTutorial.Display_formula){!this.currentTutorial.Display_formula 
         this.currentTutorial.Background_formula.lastIndexOf('\/'));
         kakuninnyou1 = kakuninnyou1 = Math.max(kakuninnyou1,
         this.currentTutorial.Background_formula.lastIndexOf('\*'));
-        let kakuninnyou2 =this.currentTutorial.Background_formula.length - (kakuninnyou1 + 1);
+        let kakuninnyou2 =this.currentTutorial.Background_formula.replaceAll("\ ","").length - (kakuninnyou1 + 1);
           
         if (kakuninnyou2  >= this.saidaiketasuu)
           {return;}         
@@ -806,8 +811,8 @@ if(!this.currentTutorial.Display_formula){!this.currentTutorial.Display_formula 
       Number(result);
       if(result>=10000000000){this.currentTutorial.Display_answer="Error!桁数制限";return;}
       if(result<=-10000000000){this.currentTutorial.Display_answer="Error!桁数制限";return;}
-      if(result<0.0000000005 && result > 0){this.currentTutorial.Display_answer="Error!四捨五入すると0になります";return;}
-      if(result>-0.0000000005 && result < 0){this.currentTutorial.Display_answer="Error!四捨五入すると0になります";return;}
+    //   if(result<0.0000000005 && result > 0){this.currentTutorial.Display_answer="Error!四捨五入すると0になります";return;}
+    //   if(result>-0.0000000005 && result < 0){this.currentTutorial.Display_answer="Error!四捨五入すると0になります";return;}
     
   
        //result2へ小数点以下の桁調整を行った数値を代入
