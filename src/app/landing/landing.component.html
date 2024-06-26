@@ -1,4 +1,70 @@
-<p>研修用課題：計算機のページです！
-<br>Googleアカウントでログイン後使用可能となります
-<br>サインインボタンからログイン可能です
-</p>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>本日のタスクリスト</title>
+  <style>
+    body {
+      font-size: 12px;
+    }
+    .genre {
+      margin-bottom: 20px;
+    }
+    .genre h3 {
+      font-size: 16px;
+      margin-bottom: 10px;
+    }
+    .task-container {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+    .task {
+      border: 1px solid #ccc;
+      padding: 5px;
+      width: 200px;
+    }
+    .task h2 {
+      margin: 0;
+      font-size: 14px;
+    }
+    .task p {
+      margin: 3px 0;
+      font-size: 12px;
+    }
+  </style>
+</head>
+<button (click)="test()">更新</button>
+<body>
+  <div *ngFor="let genre of genres">
+    <div class="genre" *ngIf="tasksByGenre[genre.id]">
+      <h3>ジャンル:{{ genre.id }}</h3>
+      <div class="task-container">
+        <div *ngFor="let item of tasksByGenre[genre.id]; trackBy: trackByFn" class="task">
+          <h2>{{ item.title }}</h2>
+          <p>ジャンル: {{ item.genre }}</p>
+          <p>タグ: {{ item.tag }}</p>
+          <p>担当者: {{item.user}}</p>
+          <p>優先度:
+            <select id="priority" name="priority" [(ngModel)]="item.priority">
+              <option *ngFor="let priorityOption of priorityOptions" [value]="priorityOption">{{ priorityOption }}</option>
+            </select>
+          </p>
+          <p>締め切り日: {{ item.deadlineTime }}</p>
+          <p>進捗:
+            <select id="status" name="status" [(ngModel)]="item.status">
+              <option *ngFor="let statusOption of statusOptions" [value]="statusOption">{{ statusOption }}</option>
+            </select>
+          </p>
+          <p>作業時間:
+            <input id="taskTime" name="taskTime" type="number" [(ngModel)]="item.taskTime" min="1" max="24" step="1" (keydown)="preventInput($event)" /> 時間
+          </p>
+          <p>メモ:
+            <input disabled="" name="freeText" id="freeText"  type="text" [(ngModel)]="item.freeText" maxlength="30" /> 
+          </p>
+          <button (click)="updateTask(item)">ステータス更新</button>
+          <button (click)="deletes(item)">このタスクを削除</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>

@@ -1,0 +1,18 @@
+/* task-edit.component.css */
+.task-edit-overlay {
+    position: absolute;
+    top: 50px; /* タスク一覧からの距離 */
+    left: 0;
+    right: 0;
+    background-color: rgba(0, 0, 0, 0.5); /* 半透明の背景色 */
+    padding: 20px;
+    z-index: 1000; /* 必要に応じて調整 */
+  }
+  
+  .task-edit-container {
+    position: relative;
+    background-color: white;
+    padding: 20px;
+    border: 1px solid #ccc;
+  }
+  

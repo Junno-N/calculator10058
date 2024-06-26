@@ -1,0 +1,25 @@
+<div *ngIf="userUId && isManager">
+  <h2>予定労働時間</h2>
+  <label for="user-select">ユーザを選択:</label>
+  <select id="user-select" (change)="onUserChange($event)">
+    <option value="">全ユーザ</option>
+    <option *ngFor="let user of users" [value]="user.name">{{ user.name }}</option>
+  </select>
+  <br>
+  <label for="month-select">月を選択:</label>
+  <select id="month-select" (change)="onMonthChange($event)" >
+    <option value="" disabled selected style="display:none;">今月</option>
+    <option *ngFor="let month of months" [value]="month.value" >{{ month.label }}</option>
+  </select>
+  <div style="display: block;">
+    <canvas 
+    baseChart
+            [datasets]="barChartData"
+            [labels]="barChartLabels"
+            [options]="barChartOptions"
+            [legend]="barChartLegend"
+
+            >
+    </canvas>
+  </div>
+</div>

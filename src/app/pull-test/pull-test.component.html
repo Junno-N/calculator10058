@@ -1,0 +1,42 @@
+
+<div>
+  <label for="sub-collection2">ジャンル</label>
+  <select id="title" (change)="onChange($event)"  name="title"
+    >
+    <option value="">選択してください</option>
+    @for (subCollection of subCollections; track subCollection) {
+      <option [value]="subCollection.id">
+        {{ subCollection.id }}
+      </option>
+    }
+  </select>
+</div>
+
+<div>
+  <label for="sub-collection3">タグ</label>
+  <select id="sub-collection3"   (change)="onChange2($event)">
+    <option value="">選択してください</option>
+    @for (subCollection of subCollections2; track subCollection) {
+      <option
+        [value]="subCollection.id">
+        {{ subCollection.id }}
+      </option>
+    }
+  </select>
+</div>
+
+
+<div>
+  <label for="sub-collection3">ユーザ</label>
+  <select id="sub-collection3" (change)="onChange3($event)">
+    <option value="">選択してください</option>
+    @for (subCollection of subCollections3; track subCollection) {
+      <option
+        [value]="subCollection.id">
+        {{ subCollection[subCollection.id] }}
+      </option>
+    }
+  </select>
+</div>
+
+

@@ -1,0 +1,49 @@
+ul.list-group {
+  list-style-type: none;
+  padding-left: 0;
+  margin-top: 20px;
+}
+
+ul.list-group li {
+  margin-bottom: 10px;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  background-color: #05386e;
+  color: #fff;
+  display: flex;
+  flex-direction: column;
+}
+
+ul.list-group li .user-info {
+  margin-bottom: 5px;
+}
+
+ul.list-group li .user-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 5px;
+}
+
+ul.list-group li .user-actions .btn {
+  margin-right: 5px;
+  padding: 5px 10px; /* ボタンのサイズを小さくする */
+}
+
+ul.list-group li .user-actions select {
+  width: 150px;
+  margin-bottom: 5px;
+}
+
+.user-list-container {
+  background-color: #f0f0f0;
+  padding: 10px;
+  border-radius: 5px;
+  max-width: 600px;
+  margin: auto;
+}
+
+.user-list-container .btn {
+  margin-bottom: 10px;
+  padding: 5px 10px; /* ボタンのサイズを小さくする */
+}

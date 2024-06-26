@@ -1,0 +1,40 @@
+    <div style="display:flex ;align-items:flex-start">
+    <div class="list">
+      <h4>ジャンルの List</h4>
+    <ul class="list-group">
+      @for (tutorial of tutorials; track tutorial.id; let i = $index) {
+      <li
+        class="list-group-item"
+        [class.selected]="i == currentIndex"
+        [class.active]="i == currentIndex"
+        (click)="setActiveTutorial(tutorial, i)"
+        >
+        {{ tutorial.id }}
+      </li>
+      }
+    </ul>
+  </div>
+
+
+<div class="user">
+  @if (currentTutorial) {
+      <div>
+        <app-tag-list
+          (refreshList)="refreshList()"
+          [tutorial]="currentTutorial"
+        ></app-tag-list>
+      </div>
+      }
+  </div>
+</div>
+  <div class="user">
+    @if (currentTutorial) {
+        <div>
+          <app-flat
+            (refreshList)="refreshList()"
+            [tutorial]="currentTutorial"
+          ></app-flat>
+        </div>
+        }
+    </div>
+    

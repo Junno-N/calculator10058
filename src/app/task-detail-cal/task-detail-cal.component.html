@@ -1,0 +1,57 @@
+      <h2>タスク編集</h2>
+      <label>Name:</label>
+      <input [(ngModel)]="task.name" />
+      <br>
+
+      <div class="task-edit-overlay">
+        <div class="task-edit-container">
+
+  <form>
+    <button (click)="discard()">X</button>
+    <button (click)="catch();discard()">変更を保存</button>
+    <button (click)="deletes();discard()">このタスクを削除</button>
+    <br>
+      <label for="genre">ジャンル</label>
+      <input  
+      disabled
+      type="text"
+        class="form-control"
+        id="genre"
+        [(ngModel)]="genre"
+        name="genre"
+      />
+      <br>
+      <label for="title" >課題名</label>
+      <input  
+      disabled
+      type="text"
+        class="form-control"
+        id="title"
+        [(ngModel)]="tasktitle"
+        name="title"
+      />
+
+            <br>
+            <input type=datetime-local name="deadlineDate" id="DeadlineDate" [(ngModel)]="data">
+            <br><p>ステータス:<select name="status" id="status"
+                [(ngModel)]="Status"
+                >
+              <option>着手前</option>
+              <option>着手中</option>
+              <option>完了</option>
+              <option>中止</option>
+              </select>
+                
+              優先度:<select  name="Priority" [(ngModel)]="Priority" id="priority">
+                <option>高</option>
+                <option>中</option>
+                <option>低</option>
+                </select></p>
+                <p>作業時間:
+                  <input type="number" name="taskTime" id="taskTime" [(ngModel)]="taskTime" min="1" max="24" step="1"
+                  (keydown)="preventInput($event)" /> 時間
+                </p>     
+                <p>メモ:
+                  <input type="text" [(ngModel)]="freeText" name="freeText" id="freeText" maxlength="30"  /> 
+                </p> 
+    

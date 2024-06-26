@@ -2,36 +2,48 @@
   <script src="https://www.gstatic.com/firebasejs/5.7.0/firebase.js"></script>
   <script>
     var config = {
-  apiKey: "AIzaSyDt30HhAfWHSgbRWhWz_Um2vMTtIXoMk9I",
-  authDomain: "training10058spring.firebaseapp.com",
-  databaseURL: "https://training10058spring-default-rtdb.asia-southeast1.firebasedatabase.app",
-  projectId: "training10058spring",
-  storageBucket: "training10058spring.appspot.com",
-  messagingSenderId: "127505554273",
-  appId: "1:127505554273:web:8729e81b60cc1684894320",
-  measurementId: "G-NHC93E8GRP"
-
+    apiKey: "apiKey",
+    apiKey: "AIzaSyDt30HhAfWHSgbRWhWz_Um2vMTtIXoMk9I",
+      authDomain: "training10058spring.firebaseapp.com",
+      databaseURL: "https://training10058spring-default-rtdb.asia-southeast1.firebasedatabase.app",
+      projectId: "training10058spring",
+      storageBucket: "training10058spring.appspot.com",
+      messagingSenderId: "127505554273",
+      appId: "1:127505554273:web:8729e81b60cc1684894320",
+      measurementId: "G-NHC93E8GRP"
     };
     firebase.initializeApp(config);
   </script>
 
 
 </head>
-
 <nav>
-  <ul>
+    <ul>
 
-    <li>
-      
-      <a routerLink="/">説明
+
+    <li>      
+      <a routerLink="/daily">デイリータスク
       </a>
     </li>
     <li>
-      <a routerLink="/signin">計算機</a>
+      <a routerLink="/">サインイン</a>
     </li>
-    <!-- <li>
-      <a routerLink="/require-auth">計算機</a>
-    </li> -->
+    <li>
+      <a routerLink="/dashboard">ダッシュボード</a>
+    </li>
+    <li>
+      <a routerLink="/registtask">タスク登録</a>
+    </li>
+    <li>
+      <a routerLink="/genre-list">ジャンルリスト</a>
+    </li>
+    <li>
+      <a routerLink="/task">カレンダー</a>
+    </li>
+    <li>
+      <a routerLink="/userauth">管理者画面</a>
+    </li>
+
 
   </ul>
 </nav>

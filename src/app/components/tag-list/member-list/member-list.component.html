@@ -1,0 +1,25 @@
+<div style="display:flex ;align-items:flex-start">
+  <div class="list">
+<h4>タスクList</h4>
+<ul class="list-group">
+ @for (tutorial of tutorials; track tutorial.id; let i = $index) {
+    <li
+      class="list-group-item"
+      [class.selected]="i == currentIndex2"
+      [class.active]="i == currentIndex2"
+      (click)="setActiveTutorial(tutorial, i)"
+    >
+    <p>タスク名:  {{tutorial.id}}</p>
+      <p>ステータス:  {{tutorial.status}}
+      作業時間:  {{tutorial.taskTime}}
+      優先度:  {{tutorial.priority}}
+      <br>
+      メモ:  {{tutorial.freeText}}
+      <br>
+      担当者:  {{tutorial.user}}</p>
+    </li>
+    }
+   
+  </ul>
+  </div>
+ 

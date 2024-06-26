@@ -1,0 +1,33 @@
+<div style="display:flex ;align-items:flex-start">
+  <div class="list">
+<h4>タグList</h4>
+<ul class="list-group">
+@for (tutorial of tutorials; track tutorial.id; let i = $index) {    
+    <li
+      class="list-group-item"
+      [class.active]="i == currentIndex"
+      [class.selected]="i === currentIndex"
+      (click)="setActiveTutorial2(tutorial, i)"
+    >
+      {{ tutorial.id }}
+    </li>
+    }
+  </ul>
+  </div>
+  <div class="tag">
+    @if (this.currentTutorial2) {
+    <div>
+              <app-member-list  
+            currentTutorial3="{}"
+        (refreshList2)="refreshList2()"
+        [tutorial]="currentTutorial2"
+        [tutorial2]="currentTutorial"
+      ></app-member-list>
+    </div>
+    } @else {
+    <div>
+      <p>タグを選択してください</p>
+    </div>
+    }
+  </div>
+  </div>

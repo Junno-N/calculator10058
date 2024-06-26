@@ -1,0 +1,57 @@
+.compact-form {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1px; /* 上下の間隔を8pxに変更 */
+    max-width: 300px;
+    margin: 0 auto;
+    background-color: #f0f0f0;
+    padding: 15px;
+    border-radius: 5px;
+  
+    .form-column {
+      display: flex;
+      flex-direction: column;
+      gap: 1px; /* ラベルと入力フィールドの間隔を4pxに変更 */
+  
+      label {
+        margin-bottom: 1px; /* ラベルの下マージンを4pxに変更 */
+        font-size: 14px;
+        color: #333;
+      }
+  
+      input[type="text"] {
+        width: calc(100% - 12px);
+        padding: 8px;
+        border: 1px solid #ccc;
+        border-radius: 3px;
+        font-size: 14px;
+        box-sizing: border-box;
+      }
+    }
+  
+    .button-container {
+      grid-column: span 2;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin-top: 12px; /* ボタンと上の間隔を12pxに変更 */
+  
+      button {
+        width: 100%;
+        padding: 10px;
+        background-color: #05386e;
+        color: #fff;
+        border: none;
+        border-radius: 3px;
+        cursor: pointer;
+        font-size: 16px;
+        font-weight: bold;
+        transition: background-color 0.3s ease;
+  
+        &:hover {
+          background-color: #0056b3;
+        }
+      }
+    }
+  }
+  

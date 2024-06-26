@@ -1,0 +1,77 @@
+<div>
+    <h2>Task Search</h2>
+    <label for="sub-collection2">ジャンルを選択してください</label>
+    <select id="title" (change)="onChange($event)" name="title">
+      <option value="">ジャンルを選択してください</option>
+      <option *ngFor="let subCollection of subCollections" [value]="subCollection.id">
+        {{ subCollection.id }}
+      </option>
+    </select>
+  
+    <input [(ngModel)]="query" placeholder="タスク名を入れよう" />
+    <button (click)="searchTasks()">Search</button>
+  </div>
+  
+  <ul *ngIf="tasks$ | async as tasks; else noResults">
+    <li *ngFor="let task of tasks">
+      {{ task.title }}
+      <button (click)="editTask(task)">Edit</button>
+    </li>
+  </ul>
+  <ng-template #noResults>
+    <p>No results found</p>
+  </ng-template>
+  
+  <button *ngIf="tasks$ | async as tasks" (click)="loadMoreTasks()">Load More</button>
+  
+   <div class="task-edit-overlay" *ngIf="selectedTask">
+    <div class="task-edit-container">
+      <h2>タスク編集</h2>
+      <form>
+        <button type="button" (click)="discard()">X</button>
+        <button type="button" (click)="updateTask()">保存</button>
+        <br>
+        <label for="genre">ジャンル</label>
+        <input type="text" class="form-control" id="genre" [(ngModel)]="selectedTask.genre" name="genre" disabled />
+        <br>
+        <label for="title">課題名</label>
+        <input type="text" class="form-control" id="title" [(ngModel)]="selectedTask.title" name="title" disabled />
+        <br>
+        <label for="deadlineDate">締め切り日</label>
+        <input type="datetime-local" id="deadlineDate" [(ngModel)]="selectedTask.deadlineDate" name="deadlineDate" />
+        <br>
+        <p>ステータス:
+          <select name="status" [(ngModel)]="selectedTask.status">
+            <option>着手前</option>
+            <option>着手中</option>
+            <option>完了</option>
+            <option>中止</option>
+          </select>
+        </p>
+        <p>優先度:
+          <select name="priority" [(ngModel)]="selectedTask.priority">
+            <option>高</option>
+            <option>中</option>
+            <option>低</option>
+          </select>
+        </p>
+        <p>進捗率:
+          <select name="rate" [(ngModel)]="selectedTask.rate">
+            <option value="0">0%</option>
+            <option value="10">10%</option>
+            <option value="20">20%</option>
+            <option value="30">30%</option>
+            <option value="40">40%</option>
+            <option value="50">50%</option>
+            <option value="60">60%</option>
+            <option value="70">70%</option>
+            <option value="80">80%</option>
+            <option value="90">90%</option>
+            <option value="100">100%</option>
+          </select>
+        </p>
+        <button type="button" class="btn btn-success" (click)="updateTask()">Submit</button>
+      </form>
+    </div>
+  </div>
+  

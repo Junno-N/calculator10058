@@ -1,0 +1,50 @@
+<div>
+  <h2>ダッシュボード</h2>
+  表示するジャンルは: <select [(ngModel)]="selectedGenreId" (change)="onGenreChange($event)">
+    <option *ngFor="let genre of genres$ | async" [value]="genre.id">{{ genre.id}}</option>
+  </select>
+</div>
+
+<div *ngIf="selectedGenreId" class="genre-dashboard">
+  <h2>{{ getSelectedGenreName() }}</h2>
+  <select (change)="setSortCriteria(selectedGenreId, $event)">
+    <option value="">並べ替え</option>
+    <option value="dateAsc">締め切り (古い順)</option>
+    <option value="dateDesc">締め切り (新しい順)</option>
+    <option value="priority">優先度</option>
+  </select>
+
+
+  <table>
+    <thead>
+      <tr>
+        <th>タスク名</th>
+        <th>ステータス</th>
+        <th>優先度</th>
+        <th>締め切り</th>
+        <th>担当者</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let task of tasksByGenre[selectedGenreId]">
+        <td>{{ task.title }}</td>
+        <td>{{ task.status }}</td>
+        <td>{{ task.priority }}</td>
+        <td>{{ task.deadlineDate.toDate().toLocaleDateString('sv-SE') }}</td>
+        <td>{{ getUserName(task.user, users$ | async) }}
+<br>{{task.user}}
+
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="chart-container">
+    <canvas baseChart
+            [datasets]="[{ data: [progressData[selectedGenreId]], label: '進捗率' }]"
+            [labels]="[selectedGenreId]"
+            [options]="chartOptions" 
+          >
+    </canvas>
+  </div>
+</div>

@@ -1,6 +1,6 @@
 import { TestBed } from '@angular/core/testing';
 
-import { Model2Service } from './model2.service';
+import { Taskform } from './model2.service';
 
 describe('Model2Service', () => {
   let service: Model2Service;

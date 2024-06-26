@@ -1,0 +1,21 @@
+.list, .tag {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .list, .tag {
+    height: 100%;}
+    
+    .list-group-item {
+        cursor: pointer;
+        padding: 9px;
+        font-size: 13px; 
+        border: 1px solid #ccc;
+      }
+      
+      .list-group-item.selected {
+        background-color: #007bff;
+        color: white;
+        font-size: 13px; 
+        padding: 9px; 
+     }

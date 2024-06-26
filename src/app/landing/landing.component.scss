@@ -1,0 +1,45 @@
+  /* Variables */
+  $primary-color: #007bff;
+  $secondary-color: #6c757d;
+  $success-color: #28a745;
+  $danger-color: #dc3545;
+  $warning-color: #ffc107;
+  $info-color: #17a2b8;
+  $light-color: #f8f9fa;
+  $dark-color: #343a40;
+  
+  /* Styles */
+  body {
+    font-family: Arial, sans-serif;
+    background-color: $light-color;
+    color: $dark-color;
+    margin: 0;
+    padding: 20px;
+  }
+  
+  h1 {
+    color: $primary-color;
+  }
+  
+  ul {
+    list-style-type: none;
+    padding: 0;
+  }
+  
+  li {
+    border-bottom: 1px solid $secondary-color;
+    padding: 20px 0;
+  }
+  
+  h2 {
+    color: $primary-color;
+  }
+  
+  p {
+    margin: 5px 0;
+  }
+  
+  .completed {
+    color: $success-color;
+    font-weight: bold;
+  }

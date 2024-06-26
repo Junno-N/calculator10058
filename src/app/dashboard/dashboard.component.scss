@@ -1,0 +1,43 @@
+.genre-dashboard {
+  margin: 20px 0;
+
+  h2 {
+    font-size: 24px;
+    margin-bottom: 10px;
+  }
+
+  select {
+    margin-bottom: 10px;
+  }
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 20px;
+
+    th, td {
+      border: 1px solid #ddd;
+      padding: 8px;
+      text-align: left;
+    }
+
+    th {
+      background-color: #f2f2f2;
+      color: #333;
+    }
+
+    tr:nth-child(even) {
+      background-color: #f9f9f9;
+    }
+
+    tr:hover {
+      background-color: #f1f1f1;
+    }
+  }
+
+  .chart-container {
+    margin-top: 20px;
+    display: flex;
+    justify-content: center;
+  }
+}

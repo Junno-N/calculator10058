@@ -1,11 +1,18 @@
-@if (angularFireAuth.authState | async) {
-    <button (click)="logOut()">Log out</button>
-
-<app-require-auth></app-require-auth>
-
-
-} @else {
-
-    <button googleSso>Sign in with google</button>
-    <br>計算機はログイン後使用可能となります
-}
+<div *ngIf="(angularFireAuth.authState | async) as user; else loggedOut">
+    <div class="user-info">
+        <p>メールアドレス:{{ user.email }}</p>
+      <p>こんにちは、{{ user.displayName }}さん</p>
+      <p>初回利用時の場合は登録ボタンを押下してください</p>
+      <button (click)="logOut()">ログアウト</button>
+      <button (click)="register()">登録</button>
+    </div>
+  </div>
+  
+  <ng-template #loggedOut>
+    <div class="login-info">
+      <button (click)="signInWithGoogle()">Googleでサインイン</button>
+      <p>アプリはログイン後使用可能となります</p>
+      <p>アプリは承認済ユーザのみ使用可能となります</p>
+    </div>
+  </ng-template>
+  

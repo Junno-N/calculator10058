@@ -11,7 +11,7 @@ export class GoogleSsoDirective {
   constructor(public angularFireAuth: AngularFireAuth) {}
   @HostListener("click")
   async onClick() {
-
+    
 const provider = new GoogleAuthProvider();  
 
 provider.setCustomParameters({
