@@ -23,7 +23,6 @@ export class SigninComponent {
 
   logOut(): void {
     this.angularFireAuth.signOut().then(() => {
-      console.log('サインアウト成功');
     }).catch(error => {
       console.error('サインアウトエラー:', error);
     });
@@ -36,7 +35,6 @@ export class SigninComponent {
     let userAddress = auth.currentUser?.email;
     
     if (!userName || !userAddress || !userUid) {
-
       return;
     }
 

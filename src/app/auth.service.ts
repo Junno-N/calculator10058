@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
-import { Observable, map } from 'rxjs';
+import { Observable, firstValueFrom, map } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
@@ -8,10 +8,15 @@ import { Observable, map } from 'rxjs';
 export class AuthService {
   [x: string]: any;
   constructor(private afAuth: AngularFireAuth) {}
-
-
+  private loggedIn = false;
+  async checkAuthState(): Promise<void> {
+    const user = await firstValueFrom(this.afAuth.authState);
+    this.loggedIn = !!user;
+  }
+  isLoggedIn(): boolean {
+    return this.loggedIn;
+  }
   
-  // ユーザー認証の状態を監視
   watchAuthState() {
     return this.afAuth.authState;
   }
@@ -31,8 +36,7 @@ export class AuthService {
 
     return this.afAuth.authState.pipe(
       map(user => {
-        // マネージャー判定ロジックに基づいてbooleanを返す
-        return true; // 適宜変更
+   return true; 
       })
     );
   }

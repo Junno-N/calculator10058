@@ -9,7 +9,7 @@ import { Observable } from "rxjs";
   providedIn: "root",
 })
 export class ApiService {
-  // backend url that returns the firebase user id of the current user
+  
   userIdUrl = `${environment.backendUrl}/userid`;
   constructor(private http: HttpClient) {}
   getUserId(): Observable<any> {

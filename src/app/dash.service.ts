@@ -8,9 +8,12 @@ export interface Task {
   deadlineDate: Timestamp;
   user: string;
   genre:string;
+  freeText:any;
+  taskTime:any;
 }
 
 export interface Genre {
+  [x: string]: unknown;
   id: string;
   name: string;
 }

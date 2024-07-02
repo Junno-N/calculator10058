@@ -9,7 +9,6 @@ import { AngularFireAuth } from "@angular/fire/compat/auth";
 import { from, lastValueFrom, Observable } from "rxjs";
 import { environment } from "../environments/environment";
 
-// needs to add this function because getting the token is async
 const addBearerToken = async (
   req: HttpRequest<any>,
   next: HttpHandlerFn,

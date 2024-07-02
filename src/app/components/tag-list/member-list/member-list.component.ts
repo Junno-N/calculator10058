@@ -4,6 +4,8 @@ import { getAuth } from 'firebase/auth';
 import { map } from 'rxjs';
 import { TutorialService } from '../../../services/tutorial.service';
 import { FieldPath, FieldValue, Timestamp } from 'firebase/firestore';
+import { DashdataService } from '../../../dashdata.service';
+import { Task } from '../../../dash.service';
 
 @Component({
   selector: 'app-member-list',
@@ -41,13 +43,31 @@ export class MemberListComponent {
   };
   
   tutorials?: Tutorial[];
-
+ preventInput(event: KeyboardEvent): void {
+  event.preventDefault();
+}
   currentIndex2 = -1;
   title = '';
 
-  constructor(private tutorialService: TutorialService) { }
+  constructor(private tutorialService: TutorialService,
+    private dataService :DashdataService 
+  ) { }
+  updateTask(task: any) {
+    this.dataService.updateTask(task).subscribe(updatedTask => {
+      console.log('Task updated:', updatedTask);
 
- 
+    });
+  }
+  deleteTask(task: any) {
+    this.dataService.deleteTask(task).subscribe(() => {
+      console.log('Task deleted:', task);
+
+    });
+  }
+  isOverdue(task: any): boolean {
+    const now = new Date();
+    return task.deadlineDate.toDate().getTime() < now && task.status !== '完了';
+  }
   retrieveTutorials(): void 
   {  
     let auth = getAuth();

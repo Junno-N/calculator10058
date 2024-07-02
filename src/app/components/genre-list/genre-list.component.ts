@@ -76,50 +76,43 @@ flag=false
 
   test(tutorials: any){
     if(this.flag==true)
-      {console.log("管理者");return}
+      {return}
 
     this.dataSharing2Service.genreList=""
-    console.log("TEST関数が呼び出されました！");
     let auth = getAuth();
     let UserAdress = auth.currentUser?.email;
     let UserUid = auth.currentUser?.uid;
     let UserName = auth.currentUser?.displayName;
-    if(!UserAdress||!UserName||!UserUid){console.log("誰もいないよ！2");return}
+    if(!UserAdress||!UserName||!UserUid){;return}
     this.tutorials=[]
     for( let i in tutorials){ 
-      console.log(this.Users,"ループ？？？")
-      console.log(i,"回目のループです!")
     let testtest = tutorials[i];
     let auth = getAuth();
     let User = auth.currentUser?.email;
     let UserName= auth.currentUser?.displayName;
-    if(!User||!UserName){console.log("誰もいないよ！");return}
-    console.log(i,"回目のループです! ユーザがいるときの処理です！")
-    console.log(User,"を使うよ")
-    console.log(testtest.id,"を使うよ")
-    if(!testtest.id){console.log(testtest,"に",testtest.id,"がない");return}
+    if(!User||!UserName){return}
+    if(!testtest.id){return}
     this.tutorialService.getAll2(testtest.id,User,UserName).snapshotChanges().pipe(
       map(action =>
         action.map(a =>
           ({ id: a.payload.doc.id, ...a.payload.doc.data() })
         )
       )
-    ).subscribe(data => {    console.log(i,"回目！のデータは",data);
-  if(data.length==0){console.log(i,"回目のループです!値がないのでリターン");return}
-  if(data==undefined){console.log(i,"回目のループです!ないのでリターン");return}
+    ).subscribe(data => {
+  if(data.length==0){;return}
+  if(data==undefined){;return}
   if(this.tutorials)
     console.log(i,"回目！");
   let checker=Number(i) ;
-  let counter=Number(1)+1
-  if(this.tutorials![checker]==testtest){console.log("ダブってる！");return;}
-  if(!tutorials[counter]){console.log("打ち止め")}
+  let counter=Number(i)+1
+  if(this.tutorials![checker]==testtest){return;}
+  if(tutorials[counter]=null){console.log("打ち止め")}
   else{  
-  this.tutorials!.push(testtest);console.log(i,"回目の提出！");
+
   this.dataSharing2Service.genreList=this.tutorials;
-  console.log(this.dataSharing2Service.genreList,"を共有提出！")
+
   this.tutorials = [...new Set(this.tutorials)]
-  console.log(this.tutorials!,"が修正後")
- 
+
   return}
   }
     )}
@@ -157,7 +150,7 @@ retrieveTutorials()
     if(this.flag==true)
       {console.log("管理者");  this.dataSharing2Service.genreList=this.tutorials;return}
     else{
-    this.test(this.tutorials);console.log("非管理者")}});
+    this.test(this.tutorials);console.log("非管理者!")}});
 
   }
 

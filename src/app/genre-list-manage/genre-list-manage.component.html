@@ -4,9 +4,11 @@
     <label for="genre">ジャンル</label>
     <select id="genre" (change)="onGenreChange($event)" name="genre">
       <option value="">選択してください</option>
-      <option *ngFor="let subCollection of subCollections" [value]="subCollection.id">
-        {{ subCollection.id }}
-      </option>
+      @for (subCollection of subCollections; track subCollection) {
+        <option [value]="subCollection.id">
+          {{ subCollection.id }}
+        </option>
+      }
     </select>
     <button (click)="deleteGenre()" [disabled]="!selectedGenre">ジャンル削除</button>
   </div>
@@ -15,16 +17,18 @@
     <label for="tag">タグ</label>
     <select id="tag" (change)="onTagChange($event)">
       <option value="">選択してください</option>
-      <option *ngFor="let subCollection of subCollections2" [value]="subCollection.id">
-        {{ subCollection.id }}
-      </option>
+      @for (subCollection of subCollections2; track subCollection) {
+        <option [value]="subCollection.id">
+          {{ subCollection.id }}
+        </option>
+      }
     </select>
     <input type="text" [(ngModel)]="newTagName" placeholder="新しいタグ名"maxlength="15"  />
     <button (click)="confirmDeleteOrUpdateTag()" [disabled]="!selectedTag">タグ削除/変更</button>
   </div>
-<div>
-  <label for="tag">タグ</label>
-  <input type="text" [(ngModel)]="tagToAdd" placeholder="追加するタグ名" maxlength="15" />
-  <button (click)="addTag()" [disabled]="!tagToAdd">タグ追加</button>
-</div>
+  <div>
+    <label for="tag">タグ</label>
+    <input type="text" [(ngModel)]="tagToAdd" placeholder="追加するタグ名" maxlength="15" />
+    <button (click)="addTag()" [disabled]="!tagToAdd">タグ追加</button>
+  </div>
 </div>

@@ -1,25 +1,61 @@
-<div style="display:flex ;align-items:flex-start">
+<div style="display: flex; align-items: flex-start; width: 100%;">
   <div class="list">
-<h4>タスクList</h4>
-<ul class="list-group">
- @for (tutorial of tutorials; track tutorial.id; let i = $index) {
-    <li
-      class="list-group-item"
-      [class.selected]="i == currentIndex2"
-      [class.active]="i == currentIndex2"
-      (click)="setActiveTutorial(tutorial, i)"
-    >
-    <p>タスク名:  {{tutorial.id}}</p>
-      <p>ステータス:  {{tutorial.status}}
-      作業時間:  {{tutorial.taskTime}}
-      優先度:  {{tutorial.priority}}
-      <br>
-      メモ:  {{tutorial.freeText}}
-      <br>
-      担当者:  {{tutorial.user}}</p>
-    </li>
-    }
-   
-  </ul>
+    <h4>タスクList</h4>
+
+    <div class="table-container">
+      <table class="list-group">
+        @if (tutorials && tutorials.length > 0) {
+          <thead>
+            <tr>
+              <th>タスク名</th>
+              <th>ステータス</th>
+              <th>作業時間</th>
+              <th>優先度</th>
+              <th>締め切り</th>
+              <th>担当者</th>
+              <th>メモ</th>
+              <th>操作</th>
+            </tr>
+          </thead>
+        }
+        <tbody>
+          @for (tutorial of tutorials; track tutorial; let i = $index) {
+            <tr
+              (click)="setActiveTutorial(tutorial, i)"
+              [class.selected]="i == currentIndex2"
+              [class.active]="i == currentIndex2"
+              [class.overdue]="isOverdue(tutorial)"
+              >
+              <td>{{ tutorial.id }}</td>
+              <td>
+                <select [(ngModel)]="tutorial.status" (change)="updateTask(tutorial)">
+                  <option value="着手前">着手前</option>
+                  <option value="着手中">着手中</option>
+                  <option value="完了">完了</option>
+                  <option value="中止">中止</option>
+                </select>
+              </td>
+              <td>
+                <input type="number" name="taskTime" id="taskTime" [(ngModel)]="tutorial.taskTime" min="1" max="24" step="1"
+                  (keydown)="preventInput($event)" (change)="updateTask(tutorial)" /> 時間
+                </td>
+                <td>
+                  <select [(ngModel)]="tutorial.priority" (change)="updateTask(tutorial)">
+                    <option value="高">高</option>
+                    <option value="中">中</option>
+                    <option value="低">低</option>
+                  </select>
+                </td>
+                <td>{{ tutorial.deadlineTime}}</td>
+                <td>{{ tutorial.user }}</td>
+                <td>{{ tutorial.freeText }}</td>
+                <td>
+                  <button (click)="deleteTask(tutorial)">削除</button>
+                </td>
+              </tr>
+            }
+          </tbody>
+        </table>
+      </div>
+    </div>
   </div>
- 

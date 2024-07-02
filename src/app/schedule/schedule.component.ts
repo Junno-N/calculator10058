@@ -1,7 +1,7 @@
-import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
+import { Component, OnInit, OnDestroy, ChangeDetectorRef } from '@angular/core';
 import { GettagService } from '../gettag.service';
-import { forkJoin, of, throwError } from 'rxjs';
-import { catchError, map, switchMap } from 'rxjs/operators';
+import { forkJoin, of, throwError, Subject } from 'rxjs';
+import { catchError, map, switchMap, takeUntil } from 'rxjs/operators';
 import { Timestamp } from '@angular/fire/firestore';
 import { ChartOptions, ChartType, ChartDataset } from 'chart.js';
 import { Task } from '../task/task.module';
@@ -11,7 +11,7 @@ import { Task } from '../task/task.module';
   templateUrl: './schedule.component.html',
   styleUrls: ['./schedule.component.scss']
 })
-export class ScheduleComponent implements OnInit {
+export class ScheduleComponent implements OnInit, OnDestroy {
   userUId!: string;
   isManager!: boolean;
   userWorkHours: { [userUId: string]: number } = {};
@@ -19,6 +19,7 @@ export class ScheduleComponent implements OnInit {
   selectedUser: string = ''; // 選択されたユーザ
   months: { value: string, label: string }[] = []; // 月のリスト
   users: { id: string, name: string }[] = []; // ユーザのリスト
+  private unsubscribe$ = new Subject<void>(); // Unsubscribe用のSubject
 
   public barChartOptions: ChartOptions = {
     responsive: true,
@@ -38,6 +39,11 @@ export class ScheduleComponent implements OnInit {
     this.loadData();
   }
 
+  ngOnDestroy() {
+    this.unsubscribe$.next();
+    this.unsubscribe$.complete();
+  }
+
   generateMonthsList() {
     const now = new Date();
     const currentYear = now.getFullYear();
@@ -52,8 +58,13 @@ export class ScheduleComponent implements OnInit {
   }
 
   loadUsers() {
-    this.taskService.getUserList().subscribe(users => {
+    this.taskService.getUserList().pipe(
+      takeUntil(this.unsubscribe$)
+    ).subscribe(users => {
       this.users = users;
+      console.log("Users loaded:", users);
+    }, error => {
+      console.error("Error loading users:", error);
     });
   }
 
@@ -70,79 +81,86 @@ export class ScheduleComponent implements OnInit {
 
   loadData() {
     this.userWorkHours = {};
-
+    console.log("Loading data for user:", this.selectedUser, "and month:", this.selectedMonth);
 
     this.taskService.getUserId().pipe(
       switchMap(userId => {
         this.userUId = userId;
         return this.taskService.isManager(this.userUId).pipe(
           catchError(error => {
-
+            console.error("Error checking manager status:", error);
             return throwError(error);
           })
         );
       }),
       switchMap(isManager => {
-
         this.isManager = isManager;
         return this.taskService.getTagList().pipe(
           catchError(error => {
-;
+            console.error("Error loading tags:", error);
             return throwError(error);
           })
         );
       }),
       switchMap(tags => {
-
         const tasksObservables = tags.map(tag => {
-
           return this.taskService.getTasksByTag(tag).pipe(
-            map(tasks => {
-
-              this.calculateTotalWorkHours(tasks);
+            map(tasks => {              
+              this.calculateTotalWorkHours(tasks,tags.length);
               this.updateChart();
               return tasks;
             }),
             catchError(error => {
-              console.log(`Error in getTasksByTag for tag :`, error);
+              console.error("Error loading tasks for tag:", tag, error);
               return of([]);
             })
           );
         });
         return forkJoin(tasksObservables).pipe(
           map(tasksArrays => {
-
             const flatTasks = tasksArrays.flat();
-
+            this.updateChart();
             return flatTasks;
           }),
           catchError(error => {
-            console.log("Error in forkJoin:", error);
+            console.error("Error in forkJoin:", error);
             return throwError(error);
           })
         );
-      })
+      }),
+      takeUntil(this.unsubscribe$)
     ).subscribe({
       next: tasks => {
-
-        this.calculateTotalWorkHours(tasks);
-        this.updateChart();
+        console.log("Tasks loaded:", tasks);
       },
       error: err => {
-        console.log("Error in observable chain:", err);
+        console.error("Error in observable chain:", err);
       }
     });
   }
 
-  calculateTotalWorkHours(tasks: Task[]) {
+  updateData() {
+    this.counter=0
+    this.flag=true
+    this.loadData();
+  }
+flag:boolean=true
+counter=0
+  calculateTotalWorkHours(tasks: Task[],length:any) {
+    if(this.flag==false){console.log("フラッグ");return} 
+ this.counter += 1 
+
+    if(this.counter==length){console.log("最後",this.counter,length);this.flag=false}
     if (!this.isManager && this.selectedUser !== this.userUId) {
       return;
-    }
-
-
+    }    
     const selectedMonth = this.selectedMonth.getMonth();
     const selectedYear = this.selectedMonth.getFullYear();
-    tasks.forEach(task => {
+    const uniquetasks = Array.from(
+      new Map(tasks.map((task) => [task.id, task])).values()
+    );  
+
+    uniquetasks.forEach(task => {
       const deadlineDate: Timestamp = task.deadlineDate;
       const deadline = deadlineDate.toDate();
       const [year, month] = task.deadlineTime.split('/').map(Number);
@@ -153,18 +171,17 @@ export class ScheduleComponent implements OnInit {
           return;
         }
         const taskHours = this.calculateTaskHours(task);
-
         if (!this.userWorkHours[userId]) {
           this.userWorkHours[userId] = 0;
+
         }
         this.userWorkHours[userId] += taskHours;
+        console.log( this.userWorkHours[userId],task.id,"あるね")
       }
     });
-
   }
 
   calculateTaskHours(task: Task): number {
-
     if (!this.isManager && this.selectedUser !== this.userUId) {
       return 0;
     }
@@ -185,5 +202,6 @@ export class ScheduleComponent implements OnInit {
     this.barChartLabels = Object.keys(this.userWorkHours);
     this.barChartData[0].data = Object.values(this.userWorkHours);
     this.cdr.detectChanges(); 
+    console.log("Chart updated:", this.barChartLabels, this.barChartData);
   }
 }

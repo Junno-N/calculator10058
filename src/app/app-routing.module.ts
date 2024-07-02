@@ -22,7 +22,9 @@ const routes: Routes = [
   { path: "daily", component: LandingComponent,
     canActivate: [authGuard],
    },
-  { path: "", component: SigninComponent },
+  { path: "signin", component: SigninComponent
+  },
+
   {
     path: 'registtask',
     component: RequireAuthComponent,
@@ -46,6 +48,7 @@ const routes: Routes = [
     canActivate: [authGuard],},
   { path: 'userauth', component:UserAuthManageComponent,
     canActivate: [authGuard],},
+    { path: '', redirectTo: '/signin', pathMatch: 'full' }
 ];
 
 @NgModule({

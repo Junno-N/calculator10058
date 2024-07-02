@@ -1,19 +1,20 @@
 
 <div>
-    <h2>ジャンル: {{ tutorial.id }}</h2>
-    <table>
-      <thead>
+  <h2>ジャンル: {{ tutorial.id }}</h2>
+  <table>
+    <thead>
+      <tr>
+        <th>ユーザー名</th>
+        <th>メールアドレス</th>
+      </tr>
+    </thead>
+    <tbody>
+      @for (user of users$ | async; track user) {
         <tr>
-          <th>ユーザー名</th>
-          <th>メールアドレス</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr *ngFor="let user of users$ | async">
           <td>{{Object(user)}}</td>
           <td>{{ user.id }}</td>
         </tr>
-      </tbody>
-    </table>
-  </div>
-  
+      }
+    </tbody>
+  </table>
+</div>

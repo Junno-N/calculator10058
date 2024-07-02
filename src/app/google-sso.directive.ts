@@ -19,7 +19,5 @@ provider.setCustomParameters({
 });
 
 const creds = await this.angularFireAuth.signInWithPopup(provider);
-
-    // do what you want with the credentials, for ex adding them to firestore...
-  }
+    }
 }

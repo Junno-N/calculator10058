@@ -1,43 +1,81 @@
+.dashboard-container {
+  display: flex;
+}
+
+.main-content {
+  flex: 1;
+  padding: 20px;
+}
+
+.sidebar {
+  width: 300px; /* サイドバーの幅を適切に設定 */
+  padding: 20px;
+  background-color: #f4f4f4;
+  border-left: 1px solid #ccc;
+}
+
+.controls {
+  margin-bottom: 20px;
+}
+
+.chart-container {
+  margin-bottom: 20px;
+  width: 20%;
+}
+
+.overdue-tasks {
+  flex: 1;
+  padding: 10px;
+  background-color: #ffcccc;
+  border: 1px solid #ff0000;
+  border-radius: 5px;
+  max-height: 400px; /* 固定の高さを設定 */
+  overflow-y: auto; /* 縦スクロールを有効に */
+}
+
+.overdue-tasks h3 {
+  margin-top: 0;
+}
+
+.overdue-tasks table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.overdue-tasks th, .overdue-tasks td {
+  border: 1px solid #ccc;
+  padding: 8px;
+  text-align: left;
+}
+
+.overdue-tasks thead {
+  background-color: #f9f9f9;
+}
+
+.chart-and-overdue {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  margin-bottom: 20px;
+}
+
 .genre-dashboard {
-  margin: 20px 0;
-
   h2 {
-    font-size: 24px;
-    margin-bottom: 10px;
-  }
-
-  select {
-    margin-bottom: 10px;
+    margin-top: 0;
   }
 
   table {
     width: 100%;
     border-collapse: collapse;
-    margin-bottom: 20px;
 
     th, td {
-      border: 1px solid #ddd;
+      border: 1px solid #ccc;
       padding: 8px;
       text-align: left;
     }
 
-    th {
-      background-color: #f2f2f2;
-      color: #333;
-    }
-
-    tr:nth-child(even) {
+    thead {
       background-color: #f9f9f9;
     }
-
-    tr:hover {
-      background-color: #f1f1f1;
-    }
-  }
-
-  .chart-container {
-    margin-top: 20px;
-    display: flex;
-    justify-content: center;
   }
 }

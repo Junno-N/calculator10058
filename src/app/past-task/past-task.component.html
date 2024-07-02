@@ -1,0 +1,84 @@
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>本日のタスクリスト</title>
+    <style>
+      body {
+      font-size: 12px;
+      max-height: 200px; 
+      max-width: 500px;
+      overflow-y: auto; 
+    }
+    .genre {
+    margin-bottom: 20px;
+  }
+  .genre h3 {
+  font-size: 16px;
+  margin-bottom: 10px;
+  }
+  .task-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  }
+  .task {
+  border: 1px solid #ccc;
+  padding: 5px;
+  width: 200px;
+  }
+  .task h2 {
+  margin: 0;
+  font-size: 14px;
+  }
+  .task p {
+  margin: 3px 0;
+  font-size: 12px;
+  }
+  </style>
+  </head>
+  <button (click)="test()">更新</button>
+  <body>
+    @for (genre of genres; track genre) {
+      <div>
+        @if (tasksByGenre[genre.id]) {
+          <div class="genre">
+            <h3>ジャンル:{{ genre.id }}</h3>
+            <div class="task-container">
+              @for (item of tasksByGenre[genre.id]; track trackByFn($index, item)) {
+                <div class="task">
+                  <h2>{{ item.title }}</h2>
+                  <p>ジャンル: {{ item.genre }}</p>
+                  <p>タグ: {{ item.tag }}</p>
+                  <p>担当者: {{item.user}}</p>
+                  <p>優先度:
+                    <select id="priority" name="priority" [(ngModel)]="item.priority">
+                      @for (priorityOption of priorityOptions; track priorityOption) {
+                        <option [value]="priorityOption">{{ priorityOption }}</option>
+                      }
+                    </select>
+                  </p>
+                  <p>締め切り日: {{ item.deadlineTime }}</p>
+                  <p>進捗:
+                    <select id="status" name="status" [(ngModel)]="item.status">
+                      @for (statusOption of statusOptions; track statusOption) {
+                        <option [value]="statusOption">{{ statusOption }}</option>
+                      }
+                    </select>
+                  </p>
+                  <p>作業時間:
+                    <input id="taskTime" name="taskTime" type="number" [(ngModel)]="item.taskTime" min="1" max="24" step="1" (keydown)="preventInput($event)" /> 時間
+                  </p>
+                  <p>メモ:
+                    <input disabled="" name="freeText" id="freeText"  type="text" [(ngModel)]="item.freeText" maxlength="30" />
+                  </p>
+                  <button (click)="updateTask(item)">ステータス更新</button>
+                  <button (click)="deletes(item)">このタスクを削除</button>
+                </div>
+              }
+            </div>
+          </div>
+        }
+      </div>
+    }
+  </body>
+  

@@ -56,10 +56,19 @@ export class TaskDetailCalComponent {
  preventInput(event: KeyboardEvent): void {
   event.preventDefault();
 }
+get minDateTime(): string {
+  const now = new Date();
+  const minDateTimeString = `${now.getFullYear()}-${this.pad(now.getMonth() + 1)}-${this.pad(now.getDate())}T${this.pad(now.getHours())}:${this.pad(now.getMinutes())}`;
+
+  return minDateTimeString;
+}
+private pad(n: number): string {
+  return n < 10 ? '0' + n : n.toString();
+}
+
   catch(){
 
 this.rate=this.rate
-
     this.genre=this.genre;
     this.Status=this.Status;
     this.Priority=this.Priority;
@@ -69,12 +78,16 @@ this.rate=this.rate
     this.data=new Date(this.data)
     let date2:any
     date2=this.data
-    .toLocaleDateString("ja-JP", {year: "numeric",month: "2-digit",  
+    .toLocaleDateString("ja-JP", {year: "numeric",month: "2-digit",
       day: "2-digit"})
+      console.log(this.data,date2,"処理後")
   this.TutorialService.getAll()
   .doc(this.genre).collection("taskList").doc(this.tasktitle)
-  .update({deadlineDate:this.data,DeadlineTime:date2,status:this.Status
-    ,priority:this.Priority,taskTime:this.taskTime, freeText:this.freeText
+  .update({deadlineDate:this.data,deadlineTime:date2,status:this.Status
+    ,priority:this.Priority,taskTime:this.taskTime})
+  this.TutorialService.getAll()
+  .doc(this.genre).collection("taskList").doc(this.tasktitle)
+  .update({freeText:this.freeText
   })
 }
 deletes(){

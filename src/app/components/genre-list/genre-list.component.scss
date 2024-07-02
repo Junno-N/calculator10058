@@ -1,6 +1,7 @@
 .list, .tag {
     display: flex;
-    flex-direction: column;
+    flex-direction: column;        max-height: 300px;
+    overflow-y: auto;
   }
   
   .list, .tag {
@@ -11,6 +12,9 @@
         padding: 9px;
         font-size: 13px; 
         border: 1px solid #ccc;
+               word-wrap: break-word;
+        max-height: 20px;
+        overflow-y: auto;
       }
       
       .list-group-item.selected {
@@ -18,4 +22,7 @@
         color: white;
         font-size: 13px; 
         padding: 9px; 
+        word-wrap: break-word;
+        max-height: 20px;
+        overflow-y: auto;
      }

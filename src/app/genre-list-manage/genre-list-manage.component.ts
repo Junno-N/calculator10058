@@ -96,7 +96,6 @@ export class GenreListManageComponent implements OnInit {
     if (this.selectedGenre) {
       if(confirm("ジャンルを削除しますか？")){
       this.firestore.collection('tutorials').doc(this.selectedGenre).delete().then(() => {
-        console.log('ジャンル削除成功');
         this.selectedGenre = '';
         this.subCollections2 = [];
         this.loadGenres();
@@ -126,7 +125,6 @@ export class GenreListManageComponent implements OnInit {
     if (this.selectedTag && this.selectedGenre) {
       this.deleteTasksWithTag(this.selectedGenre, this.selectedTag).then(() => {
         this.firestore.collection('tutorials').doc(this.selectedGenre).collection('tagList').doc(this.selectedTag).delete().then(() => {
-          console.log('タグ削除成功');
           this.selectedTag = '';
           this.loadTags(this.selectedGenre);
         }).catch(error => {
@@ -161,7 +159,6 @@ this.newTagName=this.newTagName.replaceAll(/[/:.;]/g, '')
           const tagData = doc.data();
           newTagDocRef.set(tagData!).then(() => {
             tagDocRef.delete().then(() => {
-              console.log('タグ名変更成功');
               this.updateTasksWithNewTag(this.selectedGenre, this.selectedTag, this.newTagName).then(() => {
                 this.selectedTag = '';
                 this.newTagName = '';

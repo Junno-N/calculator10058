@@ -7,6 +7,10 @@ import { DataSharingService } from '../data-sharing.service';
 import { DataSharing2Service } from '../data-sharing2.service';
 import { map } from 'rxjs';
 import { Timestamp, getDoc } from '@angular/fire/firestore';
+import { FormsModule } from '@angular/forms';
+import { getAuth } from 'firebase/auth';
+import { GettagService } from '../gettag.service';
+
 
 @Component({
   selector: 'app-add-tutorial',
@@ -39,7 +43,8 @@ export class RequireAuthComponent {
   submitted = false;
   constructor(private tutorialService: TutorialService2,
     private dataSharingService: DataSharingService,
-    private dataSharing2Service: DataSharing2Service
+    private dataSharing2Service: DataSharing2Service,
+    private taskService:GettagService 
   ) {}
   validateTagName()
 {
@@ -53,11 +58,30 @@ export class RequireAuthComponent {
   user=this.dataSharingService.user;
 
   fullWidthRegex = /[０-９Ａ-Ｚａ-ｚ]/;;
+  test(){
+    this.isManager=false
+    let auth = getAuth();
+  let userUID = auth.currentUser?.uid
+  
+  
+  if(!userUID){return}
+  this.taskService.isAuther(userUID).pipe().subscribe(isManager =>{
+    this.isManager = isManager ;console.log(this.isManager,"一度目",userUID)
+    })
+    if(this.isManager==false){
+  this.taskService.isManager(userUID).pipe().subscribe(isManager =>{
+  this.isManager = isManager ;console.log(this.isManager,"二度目")
+  })}}
+  isManager!: boolean; 
   isHalfWidthOnly(text: any) {
     return !this.fullWidthRegex.test(text);
   }
   async saveTutorial(): Promise<void> {
-    if(!this.tutorial.title||!this.tutorial){return;}
+    if(!this.tutorial.title||!this.tutorial||!this.tutorial.deadlineDate||!this.tutorial.priority
+      ||!this.tutorial.status||!this.tutorial.taskTime
+      ||!this.dataSharingService.genreName||!this.dataSharingService.user
+    )
+    {alert("全ての項目を埋めてください");return;}
     this.tags = this.dataSharingService.tagName;
     this.names = this.dataSharingService.genreName;
     this.user = this.dataSharingService.user;
@@ -88,13 +112,14 @@ this.tutorial.deadlineDate= new Date(this.tutorial.deadlineDate!)
 this.tutorial.deadlineTime= new Date(this.tutorial.deadlineDate!)
 .toLocaleDateString("ja-JP", {year: "numeric",month: "2-digit",
   day: "2-digit"})
-this.tutorialService.create(this.names,this.tutorial.title,this.tutorial).then(() => {
-this.submitted = true;
-});
+this.tutorialService.create(this.names,this.tutorial.title,this.tutorial)
+.then(() => {this.submitted = true;});
   }
   newTutorial(): void {
     this.submitted = false;
     this.tutorial = new Tutorial();
   }
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.isManager=false
+    this.test()}
 }

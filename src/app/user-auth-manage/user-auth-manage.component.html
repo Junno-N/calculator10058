@@ -1,16 +1,8 @@
-<button (click)="getUser()" class="add" >承認</button>
-
 @if (flag==true)
 {
-
   <app-user-auth>
   </app-user-auth>
-
 }
 @else
 {
-@if(flag==false&&checked==true){あなたは管理者ではありません}
-@else{
-
-権限の承認をしてください
-}}
+あなたは管理者ではありません}

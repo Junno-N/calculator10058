@@ -14,37 +14,28 @@
     };
     firebase.initializeApp(config);
   </script>
-
-
 </head>
+
 <nav>
-    <ul>
-
-
-    <li>      
-      <a routerLink="/daily">デイリータスク
-      </a>
-    </li>
+  <ul>
     <li>
-      <a routerLink="/">サインイン</a>
-    </li>
-    <li>
-      <a routerLink="/dashboard">ダッシュボード</a>
+      <a routerLink="/signin">ホーム</a>
     </li>
     <li>
       <a routerLink="/registtask">タスク登録</a>
     </li>
+
     <li>
-      <a routerLink="/genre-list">ジャンルリスト</a>
+      <a routerLink="/dashboard">ダッシュボード</a>
+    </li>
+    <li>
+     <a routerLink="/genre-list">ジャンルリスト</a>
     </li>
     <li>
       <a routerLink="/task">カレンダー</a>
     </li>
-    <li>
-      <a routerLink="/userauth">管理者画面</a>
-    </li>
-
 
   </ul>
 </nav>
+
 <router-outlet></router-outlet>

@@ -1,34 +1,44 @@
 <div class="user-list-container">
-  <button (click)=" Authchecker();getUser(); retrieveTutorials(); Getter()" class="btn btn-primary mb-3">ユーザ情報を更新する</button>
-
   <h4>ユーザ一覧</h4>
+  <button (click)="Authchecker(); getUser();  Getter()" class="btn btn-primary mb-3">ユーザ情報を更新する</button>
+
   <ul class="list-group">
     @for (tutorial of list; track tutorial; let i = $index) {
       <li class="list-group-item">
         <div class="user-info">
           {{ tutorial.Name }}
           <br>
-          {{ tutorial.Mail }}
-        </div>
-        <div class="user-actions">
-          <label for="sub-collection2"></label>
-          <select id="title{{i}}" name="title{{i}}" (change)="onChange($event)">
-            <option value="">選択してください</option>
-            @for (subCollection of subCollections; track subCollection) {
-              <option [value]="subCollection.id">
-                {{ subCollection.id }}
-              </option>
+            {{ tutorial.Mail }}
+          </div>
+          <div class="user-groups">
+            <strong>ジャンル:</strong>
+            <ul >
+              @for (group of tutorial.Groups; track group) {
+                <li class="ul">{{ group }}</li>
+              }
+            </ul>
+          </div>
+          <div class="user-actions">
+            <label for="sub-collection2"></label>
+            <select id="title{{i}}" name="title{{i}}" (change)="onChange($event)">
+              <option value="">選択してください</option>
+              @for (subCollection of subCollections; track subCollection) {
+                <option [value]="subCollection.id">
+                  {{ subCollection.id }}
+                </option>
+              }
+            </select>
+            <button class="btn btn-primary" (click)="consoler(tutorial.id, tutorial.Mail, tutorial.Name);Authchecker(); getUser();  Getter()">追加</button>
+            <button class="btn btn-danger" (click)="consoler2(tutorial.id, tutorial.Mail, tutorial.Name);Authchecker(); getUser();  Getter()">削除</button>
+            @if (flag) {
+              <div>
+                <button (click)="deletetest(tutorial.id, tutorial.Mail, tutorial.Name)" class="btn btn-danger">ユーザ削除</button>
+                <button class="btn btn-success" (click)="consoler3(tutorial.id, tutorial.Mail, tutorial.Name)">管理者追加</button>
+                <button class="btn btn-success" (click)="consoler4(tutorial.id)">管理者削除</button>
+              </div>
             }
-          </select>
-          <button class="btn btn-primary" (click)="consoler(tutorial.id, tutorial.Mail, tutorial.Name)">追加</button>
-          <button class="btn btn-danger" (click)="consoler2(tutorial.id, tutorial.Mail, tutorial.Name)">削除</button>
-          @if(flag==true){
-            <button (click)="deletetest(tutorial.id, tutorial.Mail, tutorial.Name)" class="btn btn-danger">ユーザ削除</button>
-            <button class="btn btn-success" (click)="consoler3(tutorial.id, tutorial.Mail, tutorial.Name)">管理者追加</button>
-            <button class="btn btn-success" (click)="consoler4(tutorial.id)">管理者削除</button>
-          }
-        </div>
-      </li>
-    }
-  </ul>
-</div>
+          </div>
+        </li>
+      }
+    </ul>
+  </div>

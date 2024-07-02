@@ -1,55 +1,93 @@
+<div class="container">
+  <div class="content-wrapper" [ngClass]="{'center-content': !isManager}">
+    <ng-container *ngIf="isManager; else notManager">
+      <div class="manager-section">
+        <app-user-list></app-user-list>
+      </div>
+      <div class="manager-section">
+        <app-genre-create></app-genre-create>
+        <app-genre-list-manage></app-genre-list-manage>
+      </div>
+      <div class="form-wrapper">
 
-<form>
-  <div class="submit-form">
-    
-    <div>
-        <div class="form-group">
-          <app-pull-test></app-pull-test>
+        <form class="form-container">
+          <div>
+            <div class="form-group">
+              <h2>タスク作成</h2>
+              <app-pull-test></app-pull-test>
+              <br>
+              <input (keydown)="preventInput($event)" [min]="minDateTime" [max]="9999-12-31" type="datetime-local" name="deadlineDate" id="DeadlineDate" [(ngModel)]="tutorial.deadlineDate" required>
+              <br>
+              <label for="title">課題名</label>
+              <input (input)="validateTagName()" placeholder="課題名" type="text" class="form-control" id="title" required [(ngModel)]="tutorial.title" name="title" />
+            </div>
+            <br>
+            <p>ステータス:
+              <select name="Status" [(ngModel)]="tutorial.status" required>
+                <option>着手前</option>
+                <option>着手中</option>
+                <option>完了</option>
+                <option>中止</option>
+              </select>
+            </p>
+            <br>
+            <p>優先度:
+              <select [(ngModel)]="tutorial.priority" required name="Priority">
+                <option>高</option>
+                <option>中</option>
+                <option>低</option>
+              </select>
+            </p>
+            <br>
+            <p>想定作業時間:
+              <input type="number" [(ngModel)]="tutorial.taskTime" min="1" max="24" step="1" name="taskTime" (keydown)="preventInput($event)" required /> 時間
+            </p>
+            <br>
+            <label for="title">メモ</label>
+            <input placeholder="メモ" type="text" class="form-control" id="freeText" [(ngModel)]="tutorial.freeText" name="title" maxlength="30" />
+            <button (click)="saveTutorial()" class="btn btn-success">作成</button>
+          </div>
+        </form>
+      </div>
+    </ng-container>
+    <ng-template #notManager>
+      <form class="form-container">
+        <div>
+          <div class="form-group">
+            <app-pull-test></app-pull-test>
+            <br>
+            <input (keydown)="preventInput($event)" [min]="minDateTime" [max]="9999-12-31" type="datetime-local" name="deadlineDate" id="DeadlineDate" [(ngModel)]="tutorial.deadlineDate" required>
+            <br>
+            <label for="title">課題名</label>
+            <input (input)="validateTagName()" placeholder="課題名" type="text" class="form-control" id="title" required [(ngModel)]="tutorial.title" name="title" />
+          </div>
           <br>
-          <input [min]="minDateTime" type=datetime-local name="deadlineDate" id="DeadlineDate" [(ngModel)]="tutorial.deadlineDate">
-           <br>
-          <label for="title">課題名</label>
-          <input  
-          (input)="validateTagName()"
-          placeholder="課題名" 
-          type="text"
-            class="form-control"
-            id="title"
-            required
-            [(ngModel)]="tutorial.title"
-            name="title"
-          />
-        </div>
-        
-        <br><p>ステータス:<select name="Status"
-            [(ngModel)]="tutorial.status">
-            <option>着手前</option>
-            <option>着手中</option>
-            <option>完了</option>
-            <option>中止</option>
+          <p>ステータス:
+            <select name="Status" [(ngModel)]="tutorial.status" required>
+              <option>着手前</option>
+              <option>着手中</option>
+              <option>完了</option>
+              <option>中止</option>
             </select>
-          
-            <br><p>優先度:<select  [(ngModel)]="tutorial.priority"  name="Priority">
+          </p>
+          <br>
+          <p>優先度:
+            <select [(ngModel)]="tutorial.priority" required name="Priority">
               <option>高</option>
               <option>中</option>
               <option>低</option>
-              </select>  <br> <p>想定作業時間:
-                <input type="number" [(ngModel)]="tutorial.taskTime" min="1" max="24" step="1" 
-                name="taskTime"(keydown)="preventInput($event)"  /> 時間
-              </p>
-            <br>
-            <label for="title">メモ</label>
-            <input  
-            placeholder="メモ"
-            type="text"
-              class="form-control"
-              id="freeText"
-              required
-              [(ngModel)]="tutorial.freeText"
-              name="title"
-              maxlength="30"
-            />
-            <button (click)="saveTutorial()" class="btn btn-success" >Submit</button>
-  
-          </div>
-  
+            </select>
+          </p>
+          <br>
+          <p>想定作業時間:
+            <input type="number" [(ngModel)]="tutorial.taskTime" min="1" max="24" step="1" name="taskTime" (keydown)="preventInput($event)" required /> 時間
+          </p>
+          <br>
+          <label for="title">メモ</label>
+          <input placeholder="メモ" type="text" class="form-control" id="freeText" [(ngModel)]="tutorial.freeText" name="title" maxlength="30" />
+          <button (click)="saveTutorial()" class="btn btn-success">作成</button>
+        </div>
+      </form>
+    </ng-template>
+  </div>
+</div>

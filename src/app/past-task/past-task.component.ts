@@ -2,16 +2,18 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { getAuth } from 'firebase/auth';
 import { TutorialService2 } from '../tutorial2/services.service';
 import { map, Subscription } from 'rxjs';
-import { FieldPath } from '@angular/fire/firestore';
+import { FieldPath, Timestamp } from '@angular/fire/firestore';
+
 
 @Component({
-  selector: 'app-landing',
-  templateUrl: './landing.component.html',
-  styleUrls: ['./landing.component.scss']
+  selector: 'app-past-task',
+  templateUrl: './past-task.component.html',
+  styleUrl: './past-task.component.scss'
 })
-export class LandingComponent implements OnInit, OnDestroy {
+export class PastTaskComponent {
   genres: any[] = [];
   today = new Date().toLocaleDateString("ja-JP", { year: "numeric", month: "2-digit", day: "2-digit" });
+
   shouldDisplayGenreList: boolean = false;
   tasksByGenre: { [key: string]: any[] } = {}; 
   priorityOptions: string[] = ['高', '中', '低'];
@@ -96,14 +98,18 @@ export class LandingComponent implements OnInit, OnDestroy {
 
     for (const genre of this.genres) {
       const sub = this.tutorialService.getAll().doc(genre.id).collection('taskList', ref =>
-        ref.where(new FieldPath("deadlineTime"), '==', this.today)
-          .where(new FieldPath("user"), '==', user.email)
+        ref.where(new FieldPath("user"), '==', user.email)
+        .where(new FieldPath("deadlineTime"), '!=', this.today)
+        .where(new FieldPath("status"), 'in', ["着手前","着手中",])
+          .where(new FieldPath("deadlineDate"), '<=', new Date())
       ).snapshotChanges().pipe(
         map(actions =>
           actions.map(a => ({ id: a.payload.doc.id, ...a.payload.doc.data() }))
         )
       ).subscribe(data => {
+
         if (!this.tasksByGenre[genre.id]) {
+          console.log(!this.tasksByGenre[genre.id])
           this.tasksByGenre[genre.id] = [];
         }
         data.forEach(task => {

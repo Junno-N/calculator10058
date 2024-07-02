@@ -1,18 +1,28 @@
-<div *ngIf="(angularFireAuth.authState | async) as user; else loggedOut">
+@if ((angularFireAuth.authState | async); as user) {
+  <div>
     <div class="user-info">
-        <p>メールアドレス:{{ user.email }}</p>
+      <p>メールアドレス:{{ user.email }}</p>
       <p>こんにちは、{{ user.displayName }}さん</p>
       <p>初回利用時の場合は登録ボタンを押下してください</p>
       <button (click)="logOut()">ログアウト</button>
       <button (click)="register()">登録</button>
     </div>
-  </div>
-  
-  <ng-template #loggedOut>
-    <div class="login-info">
-      <button (click)="signInWithGoogle()">Googleでサインイン</button>
-      <p>アプリはログイン後使用可能となります</p>
-      <p>アプリは承認済ユーザのみ使用可能となります</p>
+    <div class="tasks-container">
+      <div class="task">
+        本日締め切りのタスク
+        <app-landing></app-landing>
+      </div>
+      <div class="task">
+        期限切れタスク
+        <app-past-task></app-past-task>
+      </div>
     </div>
-  </ng-template>
-  
+  </div>
+} @else {
+  <div class="login-info">
+    <button (click)="signInWithGoogle()">Googleでサインイン</button>
+    <p>アプリはログイン後使用可能となります</p>
+    <p>アプリは承認済ユーザのみ使用可能となります</p>
+  </div>
+}
+

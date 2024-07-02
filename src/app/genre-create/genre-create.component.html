@@ -1,90 +1,92 @@
 <form class="compact-form">
-    <div class="form-column">
-      <label for="genre">課題名</label>
-      <input  
+  <div class="form-header">
+    <h2>ジャンル作成</h2>
+  </div>
+  <div class="form-column">
+    <label for="genre">ジャンル名</label>
+    <input  
       maxlength="15" 
       (input)="validateTagName0()" 
-        type="text"
-        class="form-control"
-        id="genre"
-        required
-        [(ngModel)]="genre"
-        name="genre"
-      />
-    </div>
-  
-    <div class="form-column">
-      <label for="tag1">タグ1</label>
-      <input  
+      type="text"
+      class="form-control"
+      id="genre"
+      required
+      [(ngModel)]="genre"
+      name="genre"
+    />
+  </div>
+
+  <div class="form-column">
+    <label for="tag1">タグ1</label>
+    <input  
       maxlength="15" 
       (input)="validateTagName1()" 
-        type="text"
-        class="form-control"
-        id="tag1"
-        required
-        [(ngModel)]="tag1"
-        name="tag1"
-      />
-    </div>
-  
-    <div class="form-column">
-      <label for="tag2">タグ2</label>
-      <input  
+      type="text"
+      class="form-control"
+      id="tag1"
+      required
+      [(ngModel)]="tag1"
+      name="tag1"
+    />
+  </div>
+
+  <div class="form-column">
+    <label for="tag2">タグ2</label>
+    <input  
       maxlength="15" 
       (input)="validateTagName2()" 
-        type="text"
-        class="form-control"
-        id="tag2"
-        required
-        [(ngModel)]="tag2"
-        name="tag2"
-      />
-    </div>
-  
-    <div class="form-column">
-      <label for="tag3">タグ3</label>
-      <input  
+      type="text"
+      class="form-control"
+      id="tag2"
+      required
+      [(ngModel)]="tag2"
+      name="tag2"
+    />
+  </div>
+
+  <div class="form-column">
+    <label for="tag3">タグ3</label>
+    <input  
       maxlength="15" 
       (input)="validateTagName3()" 
-        type="text"
-        class="form-control"
-        id="tag3"
-        required
-        [(ngModel)]="tag3"
-        name="tag3"
-      />
-    </div>
-  
-    <div class="form-column">
-      <label for="tag4">タグ4</label>
-      <input  
+      type="text"
+      class="form-control"
+      id="tag3"
+      required
+      [(ngModel)]="tag3"
+      name="tag3"
+    />
+  </div>
+
+  <div class="form-column">
+    <label for="tag4">タグ4</label>
+    <input  
       maxlength="15" 
       (input)="validateTagName4()" 
-        type="text"
-        class="form-control"
-        id="tag4"
-        required
-        [(ngModel)]="tag4"
-        name="tag4"
-      />
-    </div>
-  
-    <div class="form-column">
-      <label for="tag5">タグ5</label>
-      <input
+      type="text"
+      class="form-control"
+      id="tag4"
+      required
+      [(ngModel)]="tag4"
+      name="tag4"
+    />
+  </div>
+
+  <div class="form-column">
+    <label for="tag5">タグ5</label>
+    <input
       maxlength="15"  
       (input)="validateTagName5()" 
-        type="text"
-        class="form-control"
-        id="tag5"
-        required
-        [(ngModel)]="tag5"
-        name="tag5"
-      />
-    </div>
-  
-    <div class="button-container">
-      <button type="button" (click)="Getter()">登録</button>
-    </div>
-  </form>
-  
+      type="text"
+      class="form-control"
+      id="tag5"
+      required
+      [(ngModel)]="tag5"
+      name="tag5"
+    />
+  </div>
+
+  <div class="button-container">
+    <button type="button" (click)="Getter()">登録</button>
+  </div>
+</form>

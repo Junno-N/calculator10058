@@ -11,8 +11,7 @@ export class SearchService {
   constructor(private firestore: AngularFirestore) {}
 
   searchTasks(projectId: string, query: string, limit: number, startAfter?: any): Observable<Tutorial[]> {
-    console.log("検索クエリ:", query);
-    console.log("プロジェクトID:", projectId);
+    
     let queryRef = this.firestore.collection(`tutorials/${projectId}/taskList`, ref => {
       let q = ref.where('title', '>=', query).where('title', '<=', query + '\uf8ff').limit(limit);
       if (startAfter) {

@@ -1,4 +1,4 @@
-import { NgModule } from "@angular/core";
+import { APP_INITIALIZER, NgModule } from "@angular/core";
 import { BrowserModule } from "@angular/platform-browser";
 import { AppRoutingModule } from "./app-routing.module";
 import { AppComponent } from "./app.component";
@@ -46,12 +46,16 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 import { TaskSearchComponent } from './task-search/task-search.component';
 import { FlatComponent } from './flat/flat.component';
 import { TasksComponent } from './src/app/components/tag-list/member-list/tasks/tasks.component';
+import { AuthService } from "./auth.service";
+import { ScrollingModule } from '@angular/cdk/scrolling';
+import { PastTaskComponent } from './past-task/past-task.component';
 
 @NgModule({
   declarations: [AppComponent, SigninComponent, LandingComponent, GoogleSsoDirective, RequireAuthComponent, GenreListComponent, TagListComponent, MemberListComponent, UserAuthComponent, 
-    PullTESTComponent, CalendertestComponent, DragCompComponent, TaskDetailCalComponent, UserAuthManageComponent, GenreCreateComponent, UserListComponent, GenreListManageComponent, ScheduleComponent, DashboardComponent, TaskSearchComponent, FlatComponent, TasksComponent,  
+    PullTESTComponent, CalendertestComponent, DragCompComponent, TaskDetailCalComponent, UserAuthManageComponent, GenreCreateComponent, UserListComponent, GenreListManageComponent, ScheduleComponent, DashboardComponent, TaskSearchComponent, FlatComponent, TasksComponent, PastTaskComponent, 
   ],
   imports: [
+    ScrollingModule ,
     NgChartsModule,
     ReactiveFormsModule,
     AngularFireAuthModule,
@@ -69,7 +73,7 @@ import { TasksComponent } from './src/app/components/tag-list/member-list/tasks/
     provideFirestore(() => getFirestore()),
     provideDatabase(() => getDatabase()),
   ],
-  providers: [provideHttpClient(withInterceptors([bearerTokenInterceptor]))],
+  providers: [provideHttpClient(withInterceptors([bearerTokenInterceptor])) ],
   bootstrap: [AppComponent],
 })
 export class AppModule {

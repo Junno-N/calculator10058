@@ -1,24 +1,44 @@
+.tasks-container {
+  display: flex;
+  justify-content: space-around;
+  margin-top: 20px;
+}
+
+.task {
+  flex: 1;
+  margin: 0 10px;
+}
 .user-info, .login-info {
-    text-align: center;
-    margin-top: 20px;
-  }
-  
-  button {
-    padding: 10px 20px;
-    margin: 5px;
-    background-color: #007bff;
-    color: white;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-  }
-  
-  button:hover {
-    background-color: #0056b3;
-  }
-  
-  p {
-    font-size: 1em;
-    color: #333;
-  }
-  
+  text-align: center;
+  margin-top: 20px;
+}
+
+button {
+  padding: 10px 20px;
+  margin: 5px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+button:hover {
+  background-color: #0056b3;
+}
+
+p {
+  font-size: 1em;
+  color: #333;
+}
+
+.tasks-container {
+  display: flex;
+  justify-content: space-around;
+  margin-top: 20px;
+}
+
+.task {
+  flex: 1;
+  margin: 0 10px;
+}

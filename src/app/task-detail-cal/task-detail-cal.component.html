@@ -23,8 +23,8 @@
       <br>
       <label for="title" >課題名</label>
       <input  
-      disabled
-      type="text"
+        disabled
+        type="text"
         class="form-control"
         id="title"
         [(ngModel)]="tasktitle"
@@ -32,7 +32,8 @@
       />
 
             <br>
-            <input type=datetime-local name="deadlineDate" id="DeadlineDate" [(ngModel)]="data">
+            <input type=datetime-local name="deadlineDate"
+            id="DeadlineDate" [min]="minDateTime" [max]="9999-12-31" [(ngModel)]="data" (keydown)="preventInput($event)" >
             <br><p>ステータス:<select name="status" id="status"
                 [(ngModel)]="Status"
                 >

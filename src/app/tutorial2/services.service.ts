@@ -33,8 +33,6 @@ getAll3(id:string):AngularFirestoreCollection<Tutorial> {
 
 }
 ;
-
-
 updateTask(subCollectionId: string, id: string, data: Partial<Tutorial>): Observable<void> {
   return from(this.db.doc(`${this.dbPath}${subCollectionId}/taskList/${id}`).update(data));
 }
@@ -51,8 +49,6 @@ updateTask(subCollectionId: string, id: string, data: Partial<Tutorial>): Observ
   update2(genre:string,id: string, data: any): Promise<void> {
     return this.tutorialsRef.doc(genre).collection(id).doc("userList").set({ ...data});
   }
-
-
 
   delete(id: string): Promise<void> {
     return this.tutorialsRef.doc(id).delete();

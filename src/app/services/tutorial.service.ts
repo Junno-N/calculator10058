@@ -41,7 +41,7 @@ export class TutorialService {
   }  
 
   getAll4(id:string): AngularFirestoreCollection<Tutorial> {
-    return this.tutorialsRef
+    return this.tutorialsRef.doc(id).collection('tagList')
 
   }
 

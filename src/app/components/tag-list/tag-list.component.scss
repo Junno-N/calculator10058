@@ -4,18 +4,28 @@
   }
   
   .list, .tag {
-    height: 100%;}
-    
+    height: 100%;
+    word-wrap: break-word;
+    max-height: 300px;
+    overflow-y: auto;
+  }
+
     .list-group-item {
         cursor: pointer;
         padding: 9px;
         font-size: 13px; 
         border: 1px solid #ccc;
-      }
+        max-height: 20px;
+        overflow-y: auto;
       
+      }
+
+
       .list-group-item.selected {
         background-color: #007bff;
         color: white;
         font-size: 13px; 
         padding: 9px; 
+        max-height: 20px;
+        overflow-y: auto;
      }
